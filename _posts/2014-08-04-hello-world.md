@@ -22,5 +22,5 @@ The step afterwards requires writing the interface for the atomic buffer operati
 [shiny]: http://github.com/omnigoat/shiny
 [crassin_gigavoxels]: http://maverick.inria.fr/Membres/Cyril.Crassin/thesis/CCrassinThesis_EN_Web.pdf
 [crassin_voxelization]: http://www.seas.upenn.edu/~pcozzi/OpenGLInsights/OpenGLInsights-SparseVoxelization.pdf
-[ooc]: [http://people.cs.kuleuven.be/~ares.lagae/publications/BLD13OCCSVO/BLD13OCCSVO.pdf]
+[ooc]: http://people.cs.kuleuven.be/~ares.lagae/publications/BLD13OCCSVO/BLD13OCCSVO.pdf
 [rauwenbailey]: http://jcgt.org/published/0002/01/02/paper.pdf
