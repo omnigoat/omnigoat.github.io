@@ -30,30 +30,19 @@ Here I've just code-dumped the algorithm in C++. I think it's readable enough. K
 {% highlight c++ %}
 //
 //  some things to note:
-//    - aabc_t is an axis-aligned-bounding-cube
 //    - point4f is a function that returns a vector4f with the w-component set to 1.f
-//    - I'll probably refactor to give triangle_t a normal() function, and make a function for
-//      bounding-box intersection.
 //
-auto intersect_aabc_triangle2(aabc_t const& box, triangle_t const& tri) -> bool
+auto intersect_aabb_triangle(aabb_t const& box, triangle_t const& tri) -> bool
 {
-	auto p  = box.min_point();
-	auto pm = box.max_point();
-
-	// triangle bounding-box
-	auto tmin2 = point4f(std::min(tri.v0.x, tri.v1.x), std::min(tri.v0.y, tri.v1.y), std::min(tri.v0.z, tri.v1.z));
-	auto tmin  = point4f(std::min(tri.v2.x, tmin2.x), std::min(tri.v2.y, tmin2.y), std::min(tri.v2.z, tmin2.z));
-	auto tmax2 = point4f(std::max(tri.v0.x, tri.v1.x), std::max(tri.v0.y, tri.v1.y), std::max(tri.v0.z, tri.v1.z));
-	auto tmax  = point4f(std::max(tri.v2.x, tmax2.x), std::max(tri.v2.y, tmax2.y), std::max(tri.v2.z, tmax2.z));
-
 	// bounding-box test
-	if (tmax.x < p.x || tmax.y < p.y || tmax.z < p.z || pm.x < tmin.x || pm.y < tmin.y || pm.z < tmin.z)
+	if (!intersect_aabbs(box, tri.aabb()))
 		return false;
 
 	// triangle-normal
-	auto n = vector4f{cross_product(tri.edge0(), tri.edge1()).normalized()};
+	auto n = tri.normal();
 	
-	// delta-p, the vector of (min-point, max-point) of the bounding-box
+	// p & delta-p
+	vector4f p  = box.min_point();
 	vector4f dp = box.max_point() - p;
 
 	// test for triangle-plane/box overlap
@@ -70,9 +59,10 @@ auto intersect_aabc_triangle2(aabc_t const& box, triangle_t const& tri) -> bool
 
 
 	// xy-plane projection-overlap
-	vector4f ne0xy = vector4f{-tri.edge0().y, tri.edge0().x, 0.f, 0.f} * (n.z < 0.f ? -1.f : 1.f);
-	vector4f ne1xy = vector4f{-tri.edge1().y, tri.edge1().x, 0.f, 0.f} * (n.z < 0.f ? -1.f : 1.f);
-	vector4f ne2xy = vector4f{-tri.edge2().y, tri.edge2().x, 0.f, 0.f} * (n.z < 0.f ? -1.f : 1.f);
+	auto xym = (n.z < 0.f ? -1.f : 1.f);
+	vector4f ne0xy = vector4f{-tri.edge0().y, tri.edge0().x, 0.f, 0.f} * xym;
+	vector4f ne1xy = vector4f{-tri.edge1().y, tri.edge1().x, 0.f, 0.f} * xym;
+	vector4f ne2xy = vector4f{-tri.edge2().y, tri.edge2().x, 0.f, 0.f} * xym;
 
 	auto v0xy = math::vector4f{tri.v0.x, tri.v0.y, 0.f, 0.f};
 	auto v1xy = math::vector4f{tri.v1.x, tri.v1.y, 0.f, 0.f};
@@ -89,9 +79,10 @@ auto intersect_aabc_triangle2(aabc_t const& box, triangle_t const& tri) -> bool
 
 
 	// yz-plane projection overlap
-	vector4f ne0yz = vector4f{-tri.edge0().z, tri.edge0().y, 0.f, 0.f} * (n.x < 0.f ? -1.f : 1.f);
-	vector4f ne1yz = vector4f{-tri.edge1().z, tri.edge1().y, 0.f, 0.f} * (n.x < 0.f ? -1.f : 1.f);
-	vector4f ne2yz = vector4f{-tri.edge2().z, tri.edge2().y, 0.f, 0.f} * (n.x < 0.f ? -1.f : 1.f);
+	auto yzm = (n.x < 0.f ? -1.f : 1.f);
+	vector4f ne0yz = vector4f{-tri.edge0().z, tri.edge0().y, 0.f, 0.f} * yzm;
+	vector4f ne1yz = vector4f{-tri.edge1().z, tri.edge1().y, 0.f, 0.f} * yzm;
+	vector4f ne2yz = vector4f{-tri.edge2().z, tri.edge2().y, 0.f, 0.f} * yzm;
 
 	auto v0yz = math::vector4f{tri.v0.y, tri.v0.z, 0.f, 0.f};
 	auto v1yz = math::vector4f{tri.v1.y, tri.v1.z, 0.f, 0.f};
@@ -108,9 +99,10 @@ auto intersect_aabc_triangle2(aabc_t const& box, triangle_t const& tri) -> bool
 
 
 	// zx-plane projection overlap
-	vector4f ne0zx = vector4f{-tri.edge0().x, tri.edge0().z, 0.f, 0.f} * (n.y < 0.f ? -1.f : 1.f);
-	vector4f ne1zx = vector4f{-tri.edge1().x, tri.edge1().z, 0.f, 0.f} * (n.y < 0.f ? -1.f : 1.f);
-	vector4f ne2zx = vector4f{-tri.edge2().x, tri.edge2().z, 0.f, 0.f} * (n.y < 0.f ? -1.f : 1.f);
+	auto zxm = (n.y < 0.f ? -1.f : 1.f);
+	vector4f ne0zx = vector4f{-tri.edge0().x, tri.edge0().z, 0.f, 0.f} * zxm;
+	vector4f ne1zx = vector4f{-tri.edge1().x, tri.edge1().z, 0.f, 0.f} * zxm;
+	vector4f ne2zx = vector4f{-tri.edge2().x, tri.edge2().z, 0.f, 0.f} * zxm;
 
 	auto v0zx = math::vector4f{tri.v0.z, tri.v0.x, 0.f, 0.f};
 	auto v1zx = math::vector4f{tri.v1.z, tri.v1.x, 0.f, 0.f};
