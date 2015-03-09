@@ -25,6 +25,8 @@ Step 1 is incredibly obvious and is performed in every algorithm I ever saw. Ste
 
 ### The Algorithm, Implementation
 
+Here I've just code-dumped the algorithm in C++. I think it's readable enough. Keep in mind I use homogenous coordinates (points have 1.f in the w-component, vectors have 0.f). I haven't yet figured out how to format it nicely so it scrolls horizontally yet.
+
 {% highlight c++ %}
 //
 //  some things to note:
