@@ -32,7 +32,7 @@ Here I've just code-dumped the algorithm in C++. I think it's readable enough. K
 //  some things to note:
 //    - point4f is a function that returns a vector4f with the w-component set to 1.f
 //
-auto intersect_aabb_triangle(aabb_t const& box, triangle_t const& tri) -> bool
+inline auto intersect_aabb_triangle(aabb_t const& box, triangle_t const& tri) -> bool
 {
 	// bounding-box test
 	if (!intersect_aabbs(box, tri.aabb()))
@@ -40,10 +40,10 @@ auto intersect_aabb_triangle(aabb_t const& box, triangle_t const& tri) -> bool
 
 	// triangle-normal
 	auto n = tri.normal();
-	
+
 	// p & delta-p
-	vector4f p  = box.min_point();
-	vector4f dp = box.max_point() - p;
+	auto p  = box.min_point();
+	auto dp = box.max_point() - p;
 
 	// test for triangle-plane/box overlap
 	auto c = point4f(
@@ -60,9 +60,9 @@ auto intersect_aabb_triangle(aabb_t const& box, triangle_t const& tri) -> bool
 
 	// xy-plane projection-overlap
 	auto xym = (n.z < 0.f ? -1.f : 1.f);
-	vector4f ne0xy = vector4f{-tri.edge0().y, tri.edge0().x, 0.f, 0.f} * xym;
-	vector4f ne1xy = vector4f{-tri.edge1().y, tri.edge1().x, 0.f, 0.f} * xym;
-	vector4f ne2xy = vector4f{-tri.edge2().y, tri.edge2().x, 0.f, 0.f} * xym;
+	auto ne0xy = vector4f{-tri.edge0().y, tri.edge0().x, 0.f, 0.f} * xym;
+	auto ne1xy = vector4f{-tri.edge1().y, tri.edge1().x, 0.f, 0.f} * xym;
+	auto ne2xy = vector4f{-tri.edge2().y, tri.edge2().x, 0.f, 0.f} * xym;
 
 	auto v0xy = math::vector4f{tri.v0.x, tri.v0.y, 0.f, 0.f};
 	auto v1xy = math::vector4f{tri.v1.x, tri.v1.y, 0.f, 0.f};
@@ -80,9 +80,9 @@ auto intersect_aabb_triangle(aabb_t const& box, triangle_t const& tri) -> bool
 
 	// yz-plane projection overlap
 	auto yzm = (n.x < 0.f ? -1.f : 1.f);
-	vector4f ne0yz = vector4f{-tri.edge0().z, tri.edge0().y, 0.f, 0.f} * yzm;
-	vector4f ne1yz = vector4f{-tri.edge1().z, tri.edge1().y, 0.f, 0.f} * yzm;
-	vector4f ne2yz = vector4f{-tri.edge2().z, tri.edge2().y, 0.f, 0.f} * yzm;
+	auto ne0yz = vector4f{-tri.edge0().z, tri.edge0().y, 0.f, 0.f} * yzm;
+	auto ne1yz = vector4f{-tri.edge1().z, tri.edge1().y, 0.f, 0.f} * yzm;
+	auto ne2yz = vector4f{-tri.edge2().z, tri.edge2().y, 0.f, 0.f} * yzm;
 
 	auto v0yz = math::vector4f{tri.v0.y, tri.v0.z, 0.f, 0.f};
 	auto v1yz = math::vector4f{tri.v1.y, tri.v1.z, 0.f, 0.f};
@@ -100,9 +100,9 @@ auto intersect_aabb_triangle(aabb_t const& box, triangle_t const& tri) -> bool
 
 	// zx-plane projection overlap
 	auto zxm = (n.y < 0.f ? -1.f : 1.f);
-	vector4f ne0zx = vector4f{-tri.edge0().x, tri.edge0().z, 0.f, 0.f} * zxm;
-	vector4f ne1zx = vector4f{-tri.edge1().x, tri.edge1().z, 0.f, 0.f} * zxm;
-	vector4f ne2zx = vector4f{-tri.edge2().x, tri.edge2().z, 0.f, 0.f} * zxm;
+	auto ne0zx = vector4f{-tri.edge0().x, tri.edge0().z, 0.f, 0.f} * zxm;
+	auto ne1zx = vector4f{-tri.edge1().x, tri.edge1().z, 0.f, 0.f} * zxm;
+	auto ne2zx = vector4f{-tri.edge2().x, tri.edge2().z, 0.f, 0.f} * zxm;
 
 	auto v0zx = math::vector4f{tri.v0.z, tri.v0.x, 0.f, 0.f};
 	auto v1zx = math::vector4f{tri.v1.z, tri.v1.x, 0.f, 0.f};
