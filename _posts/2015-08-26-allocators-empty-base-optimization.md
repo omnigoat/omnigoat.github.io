@@ -15,7 +15,7 @@ struct dragon {};
 
 dragon henry, oliver;
 
-// surely the addresses are the same, but if the size of
+// surely the addresses are different, but if the size of
 // dragon was zero, they would probably overlap?
 dragon* p1 = &henry;
 dragon* p2 = &oliver;

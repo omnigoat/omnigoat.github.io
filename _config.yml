@@ -1,12 +1,13 @@
-title:        omnigoat
-tagline:      'omnigoat blogs'
-description:  'I have written words here, on various topics. Mostly C++ and graphics.'
+title:        C++GFX
+tagline:      'omnigoat'
+description:  'Things that confuse people.'
 url:          http://omnigoat.github.io
 version:      1.1.1
 author:
   name:       ''
   email:      ''
 markdown:     kramdown
+kramdown:
+  syntax_highlighter: rouge
 permalink:    pretty
-highlighter:  pygments
 paginate:     5
