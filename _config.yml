@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 title:        C++GFX
 tagline:      'omnigoat'
 description:  'Things that confuse people.'
+=======
+title:        'hello.'
+tagline:      'omnigoat blogs'
+description:  'this is a programming blog'
+>>>>>>> 10b320e88b0a56caba114fa32843e66175107340
 url:          http://omnigoat.github.io
 version:      1.1.1
 author:
