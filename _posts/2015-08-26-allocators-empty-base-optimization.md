@@ -7,45 +7,46 @@ Let's say, for the sake of argument, you're writing a drop-in replacement of `st
 
 ## The Problem
 
-Allocators don't necessarily have any members. Actually they probably don't. The default allocator almost certainly. It simply hands off to system `malloc/free`, and lets the operating system handle the free-list, fragmentation, etc. It only contains methods, no members. What is the size of such a type? It has no members, so surely zero? Haha no. The reasoning makes sense when you consider the following:
+Allocators don't necessarily have any members. Actually they probably don't. The default allocator almost certainly; The default allocator is defined to be stateless. It (probably) simply hands off to system `malloc/free` calls, and lets the operating system handle the free-list, fragmentation, etc. It only contains methods, no members. What is the size of such a type? It has no members, so surely zero? Of course not. The reasoning makes sense when you consider the following:
 
 {% highlight c++ %}
-// empty class
-struct dragon {};
+// empty type
+struct dragon_t {};
 
-dragon henry, oliver;
+dragon_t henry, oliver;
 
 // surely the addresses are different, but if the size of
-// dragon was zero, they would probably overlap?
-dragon* p1 = &henry;
-dragon* p2 = &oliver;
+// dragon_t was zero, they would probably overlap?
+dragon_t* p1 = &henry;
+dragon_t* p2 = &oliver;
 {% endhighlight %}
 
-C++ guarantees the address of two differing instances also differs. This means that if the address must differ, and a byte is the smallest addressable unit in C++ (it is), then a struct is going to take up at least one byte. And probably four, because a 32-bit (or 64-bit) CPU finds 32-bit chunks of memory very easy to work with. So `sizeof(dragon)` probably returns 4. Getting back to our problem-at-hand, it's very likely that by storing an instance of `Allocator` we'll be storing 4 bytes in our `std::vector` that contribute absolutely nothing. Fortunately there's a way around this. It's not even terrible.
+C++ guarantees two differing instances have differing addresses. This means that if the address must differ, and a byte is the smallest addressable unit in C++ (it is), then a struct is going to take up at least one byte. 'henry' and 'oliver' would "stack" on top of each other otherwise. It's very likely that by storing an instance of `Allocator` we'll be storing an extra one byte, at least, in our vector reimplementation. That's a byte that contributes absolutely nothing. Fortunately there's a way around this. It's not even terrible.
 
 ## Empty Base Optimization
 
-Maybe you've guessed at where this is going by the name of the post. Because I've sure told you what `Empty` would be, and we all love optimizations. All that leaves is *base*. And yeah, I'm talking about a *base class*. Above I wrote that "the address of two differing instances also differs". Since `dragon` has no size, the compiler gives it some size. But what if we have *other stuff* that we care about? And then what if we inherit from `dragon`?
+Maybe you've guessed at where this is going by the name of the post. Because I've sure told you what `Empty` would be, and we all love optimizations. All that leaves is *base*. And yeah, I'm talking about a *base class*. Above I wrote that "the address of two differing instances also differs". Since `dragon_t` has no size, the compiler gives it some size. But what if we have *other stuff* that we care about? And then what if we inherit from `dragon_t`?
 
 {% highlight c++ %}
-struct dragon {};
-struct wise_dragon : dragon { uint32_t intelligence; };
+struct dragon_t {};
+struct wise_dragon_t : dragon_t { uint32_t intelligence; };
 
 // sizeof(matthew) == sizeof(uint32_t)
-wise_dragon matthew;
-wise_dragon catherine;
+wise_dragon_t matthew;
+wise_dragon_t catherine;
 {% endhighlight %}
 
-Bam. When our base-class is empty, it contributes nothing to our size. This is because the address of `matthew` and `catherine` still differ. Since `dragon` has no size, if we `static_cast` from `wise_dragon` to `dragon`, we'll probably get the same pointer. But that's cool and totally allowed, and even expected, albeit not guaranteed. Since this is an optimization, nothing is guaranteed, of course. 
+Bam. When our base-class is empty, it contributes nothing to our size. This is because the address of `matthew` and `catherine` still differ. Since `dragon_t` has no size, if we `static_cast` from `wise_dragon_t` to `dragon_t`, we'll probably get the same pointer. But that's cool and totally allowed, and even expected. Let's note that if `wise_dragon_t` was also empty, *it* would be given a byte of size.
 
-It's this interaction that leads us to Empty Base Optimization. As you've probably guessed, our allocators are going to be inherited from. Does it make sense to do this when the allocators have members? No. All it does is pollute our types with the members of the base-type. Also, the *is-a* relationship dies in a fire. Is `std::vector` an `std::allocator`? It sure does allocate, but it's no allocate. So with two downsides, it'd be best to avoid inheriting from base-types with members. I mean, we usually doesn't care about EBO, until we start writing types that get used everywhere.
+It's this interaction that leads us to Empty Base Optimization. As you've probably guessed, our allocators are going to be inherited from. Does it make sense to do this when the allocators have members? No. All it does is pollute our types with the members of the base-type. Also, the *is-a* relationship dies in a fire. Is `std::vector` an `std::allocator`? It sure does allocate, but it's no allocator. So with two downsides, it'd be best to avoid inheriting from base-types when they have members. I mean, we usually don't care about EBO, until we start writing types that get used everywhere (like `vector`).
 
 ## Application
 
-So we want to integrate Empty Base Optimization into our `std::vector` replacement. There are two approaches to this. We could inherit from a templated base class (`base_vector`) that selectively activates EBO for us, or we could use a "compressed pair" with one of our `vector` members. A compressed pair (a la `boost::compressed_pair`) takes two types, and activates EBO selectively. A `vector` has usually three members: pointer, size, and capacity. Sometimes this information is encoded as three pointers, but there is (somewhat by definition) always one pointer, pointing to the start of the allocated memory. This pointer is an excellent candidate for combining with our allocator. Coupling the pointer with the allocator is not a bad thing, as they are already tightly associated (the allocator initialized the pointer, after all). This also removes complexity from the definition of our `vector`, which brings its own benefits.
+So we want to integrate Empty Base Optimization into our `std::vector` replacement. There are two approaches to this. We could inherit from a templated base class (`base_vector`) that selectively activates EBO for us, or we could use a "compressed pair" with one of our `vector` members. A compressed pair (à la `boost::compressed_pair`) takes two types, and activates EBO selectively. A `vector` has usually three members: pointer, size, and capacity. Sometimes this information is encoded as three pointers, but there is (somewhat by definition) always one pointer, pointing to the start of the allocated memory. This pointer is an excellent candidate for combining with our allocator. Coupling the pointer with the allocator is not a bad thing, as they are already tightly associated (the allocator initialized the pointer, after all). This also removes complexity from the definition of our `vector`, which brings its own benefits.
 
 
 {% highlight c++ %}
+template <typename T, typename Alloc = std::allocator<T>>
 struct vector
 {
 	// implementation...
@@ -54,6 +55,49 @@ private:
 	size_t capacity_, size_;
 	
 	// this member contains the pointer and the allocator, possibly EBOd
-	our_ebo_structure_t data_;
+	our_ebo_structure_t<T, Alloc> data_;
 };
 {% endhighlight %}
+
+Let's first ask ourselves if it's worth adapting a more generalized type (`compressed_pair`) for this job. This EBO structure is essentially a trussied-up compressed-pair; is there any benefit in writing a more specialized version? I am arguing yes, for two reasons. The first is simply that we will be writing functions that perform *pointer-and-allocator* operations, and it would be kind of weird if they were written against a `compressed_pair` of arbitrary types. Secondly, this structure is emulating a pointer (with an allocator along for the ride). We can provide pointer-specific operators (`operator []`, `operator +`, `operator ++`, etc). 
+
+Also, let's call our ebo-structure something better, like... `memory_t`. Pick whatever you want.
+
+## Implementation
+
+Since we know that it is only the *allocator* that may be optimised
+
+First, look at the declaration:
+
+{% highlight c++ %}
+template <typename T, typename Allocator = std::allocator<T>>
+struct memory_t : detail::base_memory_t<T, Allocator>
+{
+	using value_type = T;
+
+	memory_t();
+	template <typename B> memory_t(memory_t<T, B> const&);
+	explicit memory_t(Allocator const& allocator);
+	explicit memory_t(value_type* data, Allocator const& = Allocator());
+
+	auto data() const -> value_type* { return ptr_; }
+
+	auto operator *  () const -> reference;
+	auto operator ++ () -> memory_t&;
+	auto operator [] (intptr) const -> reference;
+
+	auto allocate(size_t) -> void;
+	auto deallocate() -> void;
+	auto construct_default(size_t idx, size_t count) -> void;
+	auto construct_copy(size_t idx, T const& x, size_t count) -> void;
+	// more methods...
+
+private:
+	T* ptr_;
+};
+{% endhighlight %}
+
+Here I've provided the base type (full defintiion in [this gist][gist1]).
+
+
+[gist1]: https://gist.github.com/omnigoat/a2715327c69ed350ff4f
