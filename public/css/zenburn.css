@@ -1,6 +1,6 @@
 .highlight code, .highlight pre{color:#fdce93;background-color:#3f3f3f}
 .highlight .hll{background-color:#222}
-.highlight .c{color:#7f9f7f}
+.highlight .c{color:#222}
 .highlight .err{color:#e37170;background-color:#3d3535}
 .highlight .g{color:#7f9f7f}
 .highlight .k{color:#f0dfaf}
@@ -9,9 +9,9 @@
 .highlight .o{color:#f0efd0}
 .highlight .x{color:#ccc}
 .highlight .p{color:#41706f}
-.highlight .cm{color:#7f9f7f}
-.highlight .cp{color:#7f9f7f}
-.highlight .c1{color:#7f9f7f}
+.highlight .cm{color:#222}
+.highlight .cp{color:#222}
+.highlight .c1{color:#222}
 .highlight .cs{color:#cd0000;font-weight:bold}
 .highlight .gd{color:#cd0000}
 .highlight .ge{color:#ccc;font-style:italic}

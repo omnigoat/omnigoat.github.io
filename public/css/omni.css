@@ -1,0 +1,84 @@
+.highlight code, .highlight pre{color:#f1f2f3;background-color:#282a2c}
+.highlight .hll{background-color:#222}
+
+/* generic */
+/*
+.highlight .g{color:#fff}
+.highlight .gd{color:#cd0000}
+.highlight .ge{color:#ccc;font-style:italic}
+.highlight .gr{color:red}
+.highlight .gh{color:#fff;font-weight:bold}
+.highlight .gi{color:#fff}
+.highlight .go{color:gray}
+.highlight .gp{color:#dcdccc;font-weight:bold}
+.highlight .gs{color:#ccc;font-weight:bold}
+.highlight .gu{color:purple;font-weight:bold}
+.highlight .gt{color:#0040D0}
+*/
+
+/* comments */
+.highlight .c{color:#4a6}
+.highlight .cm{color:#4a6}
+.highlight .cp{color:#4a6}
+.highlight .c1{color:#4a6}
+.highlight .cs{color:#4a6; font-weight:bold}
+
+/* error */
+.highlight .err{color:#e37170;background-color:#3d3535}
+
+/* keywords */
+.highlight .k{color:#4af}
+.highlight .kc{color:#4af}
+.highlight .kd{color:#4af}
+.highlight .kn{color:#4af;font-weight:bold}
+.highlight .kr{color:#4af}
+.highlight .kp{color:#4af}
+.highlight .kt{color:#4af}
+
+
+/* name */
+/*
+.highlight .n{color:#dcdccc}
+.highlight .na{color:#9ac39f}
+.highlight .nb{color:#efef8f}
+.highlight .nc{color:#efef8f}
+.highlight .no{color:#ccc}
+.highlight .nd{color:#ccc}
+.highlight .ni{color:#c28182}
+.highlight .ne{color:#c3bf9f;font-weight:bold}
+.highlight .nf{color:#efef8f}
+.highlight .nl{color:#ccc}
+.highlight .nn{color:#8fbede}
+.highlight .nx{color:#ccc}
+.highlight .nt{color:#9ac39f}
+.highlight .nv{color:#dcdccc}
+.highlight .vc{color:#efef8f}
+.highlight .vg{color:#dcdccc}
+.highlight .vi{color:#ffffc7}
+*/
+
+/* literals */
+.highlight .m{color:#da9}
+.highlight .s{color:#da9}
+
+
+/* other
+.highlight .o{color:#f0efd0}
+.highlight .x{color:#ccc}
+.highlight .p{color:#41706f}
+
+.highlight .ld{color:#cc9393}
+
+.highlight .py{color:#ccc}
+.highlight .ow{color:#f0efd0}
+.highlight .w{color:#ccc}
+.highlight .mf{color:#8cd0d3}
+.highlight .mh{color:#8cd0d3}
+.highlight .mi{color:#8cd0d3}
+.highlight .mo{color:#8cd0d3}
+
+.highlight .bp{color:#efef8f}
+
+.highlight .il{color:#8cd0d3}
+
+*/
