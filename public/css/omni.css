@@ -1,4 +1,20 @@
-.highlight code, .highlight pre{color:#f1f2f3;background-color:#282a2c}
+
+/* old style */
+.highlight code, .highlight pre {color:#f1f2f3; background-color:#282a2c }
+
+p {
+	text-align: justify;
+}
+
+/* new style */
+pre.highlight {
+	background-color: #282a2c;
+	color: #f1f2f3;
+	margin-left: 1.5em;
+	margin-right: 1.5em;
+	overflow-x: auto;
+}
+
 .highlight .hll{background-color:#222}
 
 /* generic */

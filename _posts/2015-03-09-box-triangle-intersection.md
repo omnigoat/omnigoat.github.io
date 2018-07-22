@@ -27,7 +27,7 @@ Step 1 is incredibly obvious and is performed in every algorithm I ever saw. Ste
 
 Here I've just code-dumped the algorithm in C++. I think it's readable enough. Keep in mind I use homogenous coordinates (points have 1.f in the w-component, vectors have 0.f). I haven't yet figured out how to format it nicely so it scrolls horizontally yet.
 
-{% highlight c++ %}
+~~~ cpp
 //
 //  some things to note:
 //    - point4f is a function that returns a vector4f with the w-component set to 1.f
@@ -120,7 +120,7 @@ inline auto intersect_aabb_triangle(aabb_t const& box, triangle_t const& tri) ->
 
 	return true;
 }
-{% endhighlight %}
+~~~
 
 [shiny]: http://github.com/omnigoat/shiny
 [schwarz_seidel]: http://research.michael-schwarz.com/publ/files/vox-siga10.pdf
