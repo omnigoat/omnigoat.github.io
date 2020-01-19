@@ -13,4 +13,4 @@ kramdown:
   syntax_highlighter: rouge
 permalink:    pretty
 paginate:     5
-gems: [jekyll-paginate]
+plugins: [jekyll-paginate]
