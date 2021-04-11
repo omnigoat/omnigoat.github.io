@@ -17,6 +17,7 @@ pre.highlight {
 
 .highlight .hll{background-color:#222}
 
+
 /* generic */
 /*
 .highlight .g{color:#fff}
@@ -51,6 +52,42 @@ pre.highlight {
 .highlight .kp{color:#4af}
 .highlight .kt{color:#4af}
 
+
+h1
+{
+	font-size: 40px;
+}
+
+h2
+{
+	margin-top: 1.75em;
+	font-size: 1.5em;
+	color: #223;
+	padding: 0em;
+}
+
+h2::after
+{
+	content: '';
+	width: 100%;
+	height: 1px;
+	margin-bottom: 0.2em;
+    left: 0;
+    display: block;
+    clear: both;
+    background-color: #666;
+}
+
+p
+{
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+.center-image
+{
+    margin: 20px auto;
+    display: block;
+}
 
 /* name */
 /*
