@@ -49,7 +49,7 @@ separate libraries, systems, and code into cognitively distinct areas within you
 
 <p style="width: 100%; text-align: center">⁂</p>
 
-![Physical evidence of me quitting a job](/assets/namespace-terracorp.png){: .center-image }
+![Physical evidence of me quitting a job](/assets/namespaces-terracorp.png){: .center-image }
 
 I shall now rant about top-level company namespaces.
 
