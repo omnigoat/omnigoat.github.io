@@ -1,28 +1,12 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
-
-  {% include head.html %}
-
-  <body>
-
-    <header class="masthead">
-      <div class="masthead-inner">
-        <h1>{{ site.title }}</h1>
-        <p class="lead">{{ site.description }}</p>
-
-        <div class="colophon">
-          <ul class="colophon-links">
-            <li>
-              <a target="_blank" href="https://github.com/omnigoat">GitHub</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </header>
-
-    <div class="content container">
-      {{ content }}
-    </div>
-
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/syntax.css">
+  </head>
+  <body class="light">
+    {{ content }}
   </body>
 </html>

@@ -49,14 +49,18 @@ separate libraries, systems, and code into cognitively distinct areas within you
 
 <p style="width: 100%; text-align: center">⁂</p>
 
-![Physical evidence of me quitting a job](/assets/namespaces-terracorp.png){: .center-image }
+```cpp
+// namespace for our new database product, DatabasePlus!
+namespace TerrorCorp::DatabasePlus
+{
+}
+```
 
 I shall now rant about top-level company namespaces.
 
 An all-encompassing namespace that bears the name of an organization is the most common
 mistake I see with "people namespaces". If this top-level namespace is
-the only one of its kind then I suspect narcissism as much as a lack of understanding, and
-you should delete it.
+the only one of its kind then you should delete it.
 
 A top-level company namespace only does _one_ functional thing - it prevents any nested namespace
 from clashing with an external library. In all my years I can not recall any
@@ -85,7 +89,19 @@ I'm offended you made me write this caveat out.
 
 ## Go Wide, Not Deep
 
-![Suicide Is Painless](/assets/namespaces-kill-me.png){: .center-image }
+```cpp
+namespace hani
+{
+    namespace logging
+    {
+        namespace diagnostics
+        {
+            // kill me I am not typing "hani::logging::diagnostics" to
+            // use this bit of your library
+        }
+    }
+}
+```
 
 In life if you wish to promote a particular behaviour I recommend removing barriers that
 makes that difficult. The two primary barriers to engineers
@@ -111,6 +127,12 @@ Muster your courage and allow fifteen, twenty adjacent namespaces.
 Realise that the number of namespaces has not changed. Instead the amount of overhead to engage with
 them is reduced. Engineers do not have to remember to which namespaces the namespaces belong.
 
+You can use this principle to your advantage. Your library will have its common functionality
+which should be exposed as per. But you can place advanced, "expert friendly" functionality into
+a nested namespace. It signifies that the user of your library has
+entered into a specially designated area and needs to know what they're doing. It feels like
+diving - the deeper you go, the more prepared you should be, and the scarier and the monsters.
+
 <p style="width: 100%; text-align: center">⁂</p>
 
 <sup>†</sup> Yeah I'm not including internal or _detail_ namespaces. Those are an artefact of
@@ -118,16 +140,19 @@ the language, and not the topic today.
 
 ## A Rose By Any Other Namespace
 
-(This bit is more subjective than the obviously _factual_ sections above)
+(This bit is more subjective than the obviously factual statements above)
 
-Names are hard. I get that. That's why salespeople are employed to think up
+Names are hard. I get that. That's why marketing people are employed to think up
 the perfect intersection between a word that is catchy and a word that represents a product.
-You have to be that salesperson for your own code. Codebases quickly grow too large for people to know the contents
-of every line. In a large enough codebase you must sell the functionality of the code within. We
-must sell to ourselves, because future us don't remember. The engineer I curse with the most frequency
-is me of coding-past.
+Codebases quickly grow too large for people to know the contents of every line - you must sell
+the functionality of the code within. 
 
-The name of a product is outside the scope of this ~~rant~~ essay. I don't have rules for what
+We must be that marketing  person for our own code. We need to market to others, or they'll
+write another version of what we've already done. We must market to ourselves, because future us does
+not remember either. The engineer I curse with the most frequency is me of coding-past. It
+is nice when I can give that guy a break.
+
+The name of a product is outside the scope of this ~~rant~~ essay; I don't have rules for what
 constitutes a good name for a product. I _do_ have rules for what makes up a good namespace. You
 may notice the concepts of _keystrokes-per-second_, and _thinking-units-per-interaction_ rear
 their heads again. At the end of this list you will know why I consider `std` to be a good namespace.
@@ -166,4 +191,5 @@ the translation-unit scope is no longer safe. That means you can't put a `using 
 the top of your `.cpp` file as a unity build will pollute all adjacent source files. So... don't do that.
 
 ## Conclusion
-You're all terrible people.
+Namespaces are basically the first thing engineers will type when using your code. Make
+sure their experience is a good and memorable one.

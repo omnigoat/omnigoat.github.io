@@ -1,0 +1,15 @@
+@use "sass:meta";
+
+$themes: (
+    "light": "themes/light",
+    "dark": "themes/dark"
+);
+
+
+@each $theme,$path in $themes
+{
+    .#{$theme}
+    {
+        @include meta.load-css($path);
+    }
+}

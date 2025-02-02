@@ -1,0 +1,36 @@
+@use "theme" as *;
+
+body
+{
+    background-color: #aaa;
+    font-family: Georgia;
+    font-size: 1.1em;
+}
+
+:not(.highlight) > code
+{
+    background-color: #d0d0d0;
+    margin-left: 0.0ch;
+    margin-right: 0.0ch;
+    padding-left: 0.2ch;
+    padding-right: 0.2ch;
+    font-size: 1.025em;
+}
+
+.post
+{
+    display: grid;
+    grid-template-columns: 1fr min(72ch, 100%) 1fr;
+
+    > *
+    {
+        grid-column: 2;
+        padding: 0ch min(6ch, 4vw);
+        background-color: #e0e0e0;
+    }
+}
+
+.post-title
+{
+    font-size: 2em;
+}

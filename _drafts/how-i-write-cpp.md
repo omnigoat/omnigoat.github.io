@@ -3,7 +3,6 @@ layout: post
 title: How I Write C++
 custom_css: how-i-write-css
 ---
-
 <style>
 .keyword {
 	color: #4af;
@@ -27,10 +26,9 @@ custom_css: how-i-write-css
 
 .literal {
 	color: #da9;
-	font-family: Consolas;	
+	font-family: Consolas;
 }
 </style>
-
 
 By all means judge.
 
@@ -42,14 +40,14 @@ _(I should point out that `Rogue`, the syntax-highlighter for this webpage, lack
 
 _(I fully expect this part to generate the most amount of hate)_
 
- * **Keywords** are <span class="keyword">blue</span>
- * **Comments** are <span class="comment">green</span>
- * **Macros** are <span class="macro">ORANGE_MACROS()</span>
- * **new/delete** are <span class='newdelete'>new, delete []</span> (red, for danger)
- * **Literals** are usually whatever, Visual Studio uses <span class='literal'>"#da9"</span>
- * ***Everything else*** is left as "default". Some people's code looks like a pina colada;
-   enum values, function names, user-defined types, constants, it's just too much man.
-   I want to be able to read the structure of your code, not have to break open a pinata.
+* **Keywords** are `<span class="keyword">`blue
+* **Comments** are `<span class="comment">`green
+* **Macros** are `<span class="macro">`ORANGE_MACROS()
+* **new/delete** are <span class='newdelete'>new, delete []</span> (red, for danger)
+* **Literals** are usually whatever, Visual Studio uses `<span class='literal'>`"#da9"
+* ***Everything else*** is left as "default". Some people's code looks like a pina colada;
+  enum values, function names, user-defined types, constants, it's just too much man.
+  I want to be able to read the structure of your code, not have to break open a pinata.
 
 ## General Code
 
@@ -61,13 +59,13 @@ struct dragon_t
 	// I wouldn't do something this asinine in real code
 	using name_t = std::string;
 
-	dragon_t();
+    dragon_t();
 	dragon_t(name_t const&);
 
-	auto name() const -> name_t const& { return name_; }
+    auto name() const -> name_t const& { return name_; }
 	auto age() const -> int { return age_; }
 
-	auto calculate_taxes() -> void;
+    auto calculate_taxes() -> void;
 
 private:
 	name_t name_;
@@ -143,7 +141,6 @@ what it does. Anything that does _lots of work_ should have a name that signifie
 
 #### Note 2: If you need a direct setter, just prefix with `set_` and feel bad.
 
-
 ### Trailing return-types as a default
 
 Let's also show the difference between `get_` as a prefix:
@@ -178,5 +175,4 @@ switch to public before switching back to private like an idiot.
 ### Struct layout
 
 Before we get to specifics, let's think about what we're trying to accomplish with our type declaration.
-We need the 
-
+We need the
