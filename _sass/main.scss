@@ -1,10 +1,53 @@
 @use "theme" as *;
 
+//
+// site-layout
+//
+.center
+{
+    display: grid;
+    grid-template-columns: 1fr min(88ch, 100%) 1fr;
+
+    > *
+    {
+        grid-column: 2;
+        padding: 0ch min(6ch, 4vw);
+    }
+}
+
+.banner
+{
+    min-height: 300px;
+    background: #222;
+    margin-bottom: 0.33lh;
+}
+
+.site-navigation
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 0;
+    > *
+    {
+        text-align: center;
+    }
+
+    p.home { grid-column: 1; }
+    p.posts { grid-column: 2; }
+    p.about { grid-column: 3; }
+}
+
+
+
 body
 {
-    background-color: #aaa;
-    font-family: Georgia;
     font-size: 1.1em;
+    line-height: 1.33em;
+}
+
+h2
+{
+    margin-top: 1.9em;
 }
 
 :not(.highlight) > code
@@ -15,22 +58,4 @@ body
     padding-left: 0.2ch;
     padding-right: 0.2ch;
     font-size: 1.025em;
-}
-
-.post
-{
-    display: grid;
-    grid-template-columns: 1fr min(72ch, 100%) 1fr;
-
-    > *
-    {
-        grid-column: 2;
-        padding: 0ch min(6ch, 4vw);
-        background-color: #e0e0e0;
-    }
-}
-
-.post-title
-{
-    font-size: 2em;
 }
