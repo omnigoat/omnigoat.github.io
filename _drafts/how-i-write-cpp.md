@@ -4,29 +4,28 @@ title: How I Write C++
 custom_css: how-i-write-css
 ---
 <style>
-.keyword {
-	color: #4af;
+.exc {
 	font-family: Consolas;
+}
+
+.keyword {
+	color: #28d;
 }
 
 .comment {
 	color: #4a6;
-	font-family: Consolas;
 }
 
 .macro {
 	color: #fa4;
-	font-family: Consolas;
 }
 
 .newdelete {
 	color: #d22;
-	font-family: Consolas;
 }
 
 .literal {
 	color: #da9;
-	font-family: Consolas;
 }
 </style>
 
@@ -36,15 +35,16 @@ By all means judge.
 
 Let's start with something easy, how I colourize my syntax-highlighting:
 
-_(I should point out that `Rogue`, the syntax-highlighter for this webpage, lacks features)_
+_(I should point out that `Rouge`, the syntax-highlighter for this webpage, lacks features)_
 
 _(I fully expect this part to generate the most amount of hate)_
 
-* **Keywords** are `<span class="keyword">`blue
-* **Comments** are `<span class="comment">`green
-* **Macros** are `<span class="macro">`ORANGE_MACROS()
-* **new/delete** are <span class='newdelete'>new, delete []</span> (red, for danger)
-* **Literals** are usually whatever, Visual Studio uses `<span class='literal'>`"#da9"
+* **Keywords** are <span class="exc keyword">`blue`</span>
+* **Comments** are <span class="exc comment">`green`</span>
+* **Macros** are <span class="exc macro">`ORANGE_MACROS()`</span><br />Unfotunately, Rouge is colourising
+everything orange, where in actuality I use the Visual Studio default grey for the directive itself
+* **new/delete** are <span class="exc newdelete">`new, delete []`</span> (red, for danger)
+* **Literals** are usually whatever, Visual Studio uses <span class="exc literal">`"#da9"`</span>
 * ***Everything else*** is left as "default". Some people's code looks like a pina colada;
   enum values, function names, user-defined types, constants, it's just too much man.
   I want to be able to read the structure of your code, not have to break open a pinata.
@@ -54,21 +54,26 @@ _(I fully expect this part to generate the most amount of hate)_
 Here's a small working example that illustrates many things I'll go over:
 
 {% highlight c++ %}
+#include <all/the/things.hpp>
+
+#define DRAGON_ASSERT(expr) INTERNAL_ASSERT_MACHINERY(expr, #expr)
+
 struct dragon_t
 {
-	// I wouldn't do something this asinine in real code
+	// this is pretty reductive, and something I
+	// wouldn't do in real code
 	using name_t = std::string;
 
-    dragon_t();
+	dragon_t();
 	dragon_t(name_t const&);
 
-    auto name() const -> name_t const& { return name_; }
+	auto name() const -> name_t const& { return name_; }
 	auto age() const -> int { return age_; }
 
-    auto calculate_taxes() -> void;
+	auto calculate_taxes() -> void;
 
 private:
-	name_t name_;
+	name_t name_ {"henry"};
 	int age_ = 0;
 }
 {% endhighlight %}
@@ -81,7 +86,7 @@ Since identifiers are shared between typenames
 and methods/members, you sometimes have a [e.g.] mesh simply called `mesh`. Well, you'd
 need to rename the member or the type. I chose types.
 
-### Use `using` instead of `typedef`
+### Use <span class="exc keyword">`using`</span> instead of `typedef`
 
 The using expression unites type definitions to the same structure as others:
 
@@ -90,7 +95,8 @@ The using expression unites type definitions to the same structure as others:
 using boss_t = dragon_t;
 auto boss = boss_t{"henry"};
 
-// 'typedef' gets weird for function-pointers; 'using' helps alleviate this somewhat
+// 'typedef' gets weird for function-pointers
+// 'using' helps alleviate this somewhat
 typedef int(dragon_t::*fnptr)(int, int);
 using fnptr = int(dragon_t::*)(int, int);
 

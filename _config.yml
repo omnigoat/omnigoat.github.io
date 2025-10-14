@@ -1,10 +1,10 @@
 title:        'hello.'
 tagline:      'omni blogs'
-description:  'this is a programming blog'
+description:  'this is a programming blog, capiche?'
 url:          http://omnigoat.github.io
 version:      1.1.1
 author:
-  name:       ''
+  name:       'jona'
   email:      ''
 markdown: kramdown
 highlighter: rouge
@@ -14,3 +14,9 @@ kramdown:
 permalink:    pretty
 paginate: 2
 plugins: [jekyll-paginate]
+include: [.well-known]
+defaults:
+  - scope:
+      path: "assets/img"
+    values:
+      image: true

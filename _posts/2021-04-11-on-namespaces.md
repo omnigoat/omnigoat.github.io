@@ -90,17 +90,17 @@ I'm offended you made me write this caveat out.
 ## Go Wide, Not Deep
 
 ```cpp
-namespace hani
-{
-    namespace logging
-    {
-        namespace diagnostics
-        {
-            // kill me I am not typing "hani::logging::diagnostics" to
-            // use this bit of your library
-        }
-    }
-}
+ 1  namespace hani
+ 2  {
+ 3    namespace logging
+ 4    {
+ 5      namespace diagnostics
+ 6      {
+ 7         // kill me I am not typing "hani::logging::diagnostics" to
+ 8        // use this bit of your library
+ 9      }
+10    }
+11  }
 ```
 
 In life if you wish to promote a particular behaviour I recommend removing barriers that
@@ -131,7 +131,7 @@ You can use this principle to your advantage. Your library will have its common 
 which should be exposed as per. But you can place advanced, "expert friendly" functionality into
 a nested namespace. It signifies that the user of your library has
 entered into a specially designated area and needs to know what they're doing. It feels like
-diving - the deeper you go, the more prepared you should be, and the scarier and the monsters.
+diving - the deeper you go, the more prepared you should be, and the more ferocious the dragons.
 
 <p style="width: 100%; text-align: center">⁂</p>
 
@@ -142,14 +142,14 @@ the language, and not the topic today.
 
 (This bit is more subjective than the obviously factual statements above)
 
-Names are hard. I get that. That's why marketing people are employed to think up
+Names are hard. I get that. That is why marketing people are employed to think up
 the perfect intersection between a word that is catchy and a word that represents a product.
 Codebases quickly grow too large for people to know the contents of every line - you must sell
 the functionality of the code within. 
 
-We must be that marketing  person for our own code. We need to market to others, or they'll
-write another version of what we've already done. We must market to ourselves, because future us does
-not remember either. The engineer I curse with the most frequency is me of coding-past. It
+We must be that marketing  person for our own code. We need to market to others, or they will
+write another version of what we have already done, but worse. We must market to ourselves, because
+future us does not remember. The engineer I curse with the most frequency is me of coding-past. It
 is nice when I can give that guy a break.
 
 The name of a product is outside the scope of this ~~rant~~ essay; I don't have rules for what

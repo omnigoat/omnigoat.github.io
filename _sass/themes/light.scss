@@ -22,7 +22,7 @@ $screen-width:  780px;
 
 //endregion
 
-//region Theme
+
 
 $theme-name: 'light';
 $title-font-family: Arial, sans-serif;
@@ -33,19 +33,125 @@ $header-font-family: "ibm-plex-sans", "IBM Plex Sans", sans-serif;
 $header-2-font-family: "ibm-plex-serif", "IBM Plex Serif", "ff-tisa-web-pro", Georgia, "Times New Roman", serif;
 $fixed-width-font-family: 'ibm-plex-mono', "IBM Plex Mono", 'SF Mono', 'Consolas', monospace;
 
-$void: #ddc7b7;
-$background: #f0f0e7;
+//$void: #e0d7d0;
+$void: #e0c7c0;
+//$void: #777;
+$background: #eaeae7;
 
 $link-background: #f7f7f0;
 $color-link: #662;
-$color-highlight: #aa6;
+$color-highlight: #ba0;
 
+// title-styling
+$title-color: #554;
+$title-hover-color: #fa6;
 
 body
 {
     background-color: $void;
 }
 
+// sidebar
+.sidebar-avatar
+{
+    background-image: radial-gradient(closest-side, white, $void);
+}
+
+.sidebar-blurb
+{
+    margin: 0 0.5em;
+    font-size: 1.5em;
+}
+
+.sidebar-blurb p
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+.sidebar-blurb a
+{
+    font-family: "ff-tisa-web-pro", "IBM Plex Serif", Georgia, "Times New Roman", serif;
+    text-decoration: underline;
+    //margin: 0 0.25em;
+}
+
+.sidebar-blurb a.title
+{
+    font-family: "ff-tisa-web-pro", "IBM Plex Serif", Georgia, "Times New Roman", serif;
+    font-size: 3em;
+    text-align: left;
+    color: black;
+    text-decoration-color: #f25;
+    margin-right: 0.25em;
+
+    &:after
+    {
+        content: "\00a0\00a0\00a0\00a0\00a0\00a0";
+    }
+}
+
+.sidebar-blurb .description
+{
+    font-family: georgia;
+    font-size: 0.7em;
+    line-height: 1.5em;
+}
+
+.sidebar-blurb .navigation a
+{
+    font-family: Helvetica, Arial, "sans-serif";
+    color: #222;
+
+    &:hover
+    {
+        color: #444;
+    }
+
+    &.nav_home
+    {
+        text-decoration-color: red;
+        &:hover
+        {
+            text-decoration-color: #f66;
+            text-shadow: 0 0 1em #f66;
+        }
+    }
+
+    &.nav_posts
+    {
+        text-decoration-color: green;
+        &:hover
+        {
+            text-decoration-color: #393;
+            text-shadow: 0 0 1em #393;
+        }
+    }
+
+    &.nav_about
+    {
+        text-decoration-color: #25f;
+        &:hover
+        {
+            text-decoration-color: #3af;
+            text-shadow: 0 0 1em #3af;
+        }
+    }
+}
+
+
+.sidebar-blurb a.nav_posts
+{
+    text-decoration-color: #2a3;
+    text-align: left;
+    margin-right: 0.25em;
+}
+
+.sidebar-blurb .author:hover
+{
+    text-decoration-color: #f79;
+    color: #d04;
+}
 
 //
 // site-navigation
@@ -71,16 +177,42 @@ body
     margin-bottom: 0.33lh;
 }
 
+a.paginated-post-title
+{
+    font-size: 1.2em;
+    color: $title-color;
+}
+
+a.paginated-post-title:hover
+{
+    color: $title-hover-color;
+}
+
+
 //
 // post
 // ------
 //
 //
+.posts
+{
+    background-color: $background;
+}
 .post
 {
     font-family: Georgia;
     color: #332;
     background-color: $background;
+    padding-top: 2.5em;
+    padding-bottom: 2em;
+    margin-bottom: 2em;
+    line-height: 1.5em;
+    //width: 100%;
+
+    h2
+    {
+        font-family: "bingbong", Lato, "Microsoft Yahei", sans-serif;
+    }
 }
 
 .post-header, .post-content
@@ -97,8 +229,9 @@ body
 .post-title
 {
     font-size: 3em;
-    color: #333;
+    color: $title-color;
     margin-bottom: 0;
+    font-family: Arial;
 }
 
 .post-author
@@ -112,6 +245,7 @@ body
 {
     padding-top: 1lh;
     padding-bottom: 2lh;
+    width: 100%;
 }
 
 .h5
@@ -119,9 +253,15 @@ body
     font-family: Roboto Mono;
 }
 
-:not(.highlight) > code
+// CODE
+.highlight
 {
-    background-color: #dfdfd0;
+    line-height: 1rem;
+}
+
+:not(.highlight) > .blammo
+{
+    //background-color: #dfdfd0;
     color: #000;
     margin-left: 0.0ch;
     margin-right: 0.0ch;
