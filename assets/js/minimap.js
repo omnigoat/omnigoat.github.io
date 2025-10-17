@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () =>
     
     // last position for scrolling
     var scroll_position = 0;
+    var scroll_perc = 0.0;
     var controller_has_capture = false;
 
     function reposition_controller()
@@ -73,7 +74,11 @@ document.addEventListener("DOMContentLoaded", () =>
         controller_has_capture = true;
         //let x = e.touches ? e.touches[0].clientX : e.clientX;
         let y = e.touches ? e.touches[0].clientY : e.clientY;
+
+        // scroll percentage
+        scroll_perc = document.body.scrollTop / document.body.scrollHeight;
         scroll_position = y;
+
         let r = controller.getBoundingClientRect();
         if (y < r.top)
         {
@@ -125,6 +130,7 @@ document.addEventListener("DOMContentLoaded", () =>
         }
 
         // update mouse-delta of drag
+
         var delta = (y - scroll_position);
         scroll_position = y;
 
@@ -144,7 +150,11 @@ document.addEventListener("DOMContentLoaded", () =>
             }
         }
 
-        window.scrollBy(0, delta / minimap.offsetHeight * document.body.scrollHeight);
+        const yt = y - minimap.clientTop;
+        const sr = r.height + c.height;
+        const dd = yt / sr;
+        //window.scrollTo(0, dd * document.body.scrollHeight);
+        window.scrollBy(0, delta / r.height * document.body.scrollHeight);
     }
 
     function controller_up()

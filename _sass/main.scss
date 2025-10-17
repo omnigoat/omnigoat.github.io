@@ -44,6 +44,13 @@ body
     //overflow: visible;
 }
 
+.minimap .contents p
+{
+    //color: #555;
+    //background-color: #555;
+    filter: blur(3px);
+}
+
 .minimap .contents .post
 {
     //padding: 2rem;
