@@ -7,8 +7,10 @@ document.addEventListener("DOMContentLoaded", () =>
     var contents = document.querySelector(".minimap .contents");
     var scroll_target = document.querySelector("section.content section.posts");
 
-    // width ratio from content -> minimap
+    // width ratio from scroll-target -> minimap
     var w = 1;
+    // ratio from "natural height" of minimap to the height that fits into the window
+    var wy = 1;
 
     // is mouse/touch down
     var down = !1;
@@ -20,19 +22,29 @@ document.addEventListener("DOMContentLoaded", () =>
     // -1=above, 1=below, 0=within
     var outside_minimap = 0;
 
+    function visible_height(element)
+    {
+        const r = element.getBoundingClientRect();
+        const h1 = Math.min(r.height, window.innerHeight - r.top);
+        const h2 = Math.min(r.bottom, window.innerHeight);
+        return Math.max(0, r.top > 0 ? h1 : h2);
+    }
+
     function reposition_controller()
     {
-        let remap = (window.innerHeight / minimap.offsetHeight);
-        let scroll_percentage = window.scrollY / (document.body.clientHeight - window.innerHeight);
-        let scroll_range = (window.innerHeight - controller.clientHeight * remap);
-        let d = scroll_percentage * scroll_range / remap;
+        const visible_minimap_height = visible_height(minimap);
+        const c = controller.getBoundingClientRect();
 
+        const scroll_percentage = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+        const d = scroll_percentage * (visible_minimap_height - c.height);
         controller.style.transform = `translate(0px, ${d}px)`;
     }
 
     function align_contents()
     {
-        let t = document.body.clientHeight * w - window.innerHeight;
+        reposition_controller();
+
+        let t = scroll_target.scrollHeight * w - window.innerHeight;
         
         if (t <= 0)
         {
@@ -40,12 +52,13 @@ document.addEventListener("DOMContentLoaded", () =>
         }
         else
         {
-            console.log(window.scrollY, document.body.clientHeight, window.innerHeight);
+            //console.log("r: ", r);
+            //console.log(window.scrollY, document.body.clientHeight, window.innerHeight);
             let delta = window.scrollY / (document.body.clientHeight - window.innerHeight);
             delta = (delta > 1 ? 1 : delta);
-            console.log(`delta: ${delta}`);
+            //console.log(`delta: ${delta}`);
             t *= delta;
-            contents.style.top = `-${t}px`;
+            contents.style.top = `0px`;
         }
 
         reposition_controller();
@@ -53,22 +66,23 @@ document.addEventListener("DOMContentLoaded", () =>
 
     function resize_minimap()
     {
-        //w = minimap.clientWidth / scroll_target.clientWidth;
         w = minimap.clientWidth / scroll_target.offsetWidth;
+
+        const mmh = scroll_target.clientHeight * w;
+        wy = (mmh > window.innerHeight) ? window.innerHeight / mmh : 1;
 
         var o = scroll_target.offsetHeight / scroll_target.offsetWidth;
 
         //sizer.style.paddingTop = 100 * o + "%";
-        sizer.style.paddingTop = o * minimap.clientWidth + "px";
-        contents.style.height = 100 / w + "%";
+        sizer.style.paddingTop = o * minimap.clientWidth * wy + "px";
+        contents.style.height = 100 / w * wy + "%";
         contents.style.width = 100 / w + "%";
-        contents.style.transform = `scale(${w})`;
+        contents.style.transform = `scale(${w}, ${w * wy})`;
 
         const k = window.innerHeight / scroll_target.offsetWidth;
-        const wi = 1.0 / w;
 
         controller.style.width = minimap.clientWidth + "px";
-        controller.style.height = minimap.clientWidth * k + "px";
+        controller.style.height = minimap.clientWidth * k * wy + "px";
 
         align_contents();
     }
@@ -105,8 +119,11 @@ document.addEventListener("DOMContentLoaded", () =>
         // move arbitrarily elsewhere
         else
         {
-            window.scrollTo(0, (y - c.height / 2) / r.height * document.body.scrollHeight);
+            const mh = visible_height(minimap);
+            window.scrollTo(0, (y - c.height / 2) / mh * document.body.scrollHeight);
         }
+
+        controller.style.opacity = 0.1;
     }
 
     function controller_move(e)
@@ -157,17 +174,18 @@ document.addEventListener("DOMContentLoaded", () =>
         }
 
         // don't perform scrolling if we were outside the minimap
-        if (y < r.top || r.bottom < y)
+        const minimap_visible_top = Math.min(0, r.top);
+        const minimap_visible_height = visible_height(minimap);
+        if (y < minimap_visible_top || minimap_visible_height < y)
         {
             controller_has_capture = false;
-            outside_minimap = (y < r.top ? -1 : r.bottom < y ? 1 : 0);
+            outside_minimap = (y < minimap_visible_top ? -1 : minimap_visible_height < y ? 1 : 0);
             return;
         }
 
         // update mouse-delta of drag
         var delta = (y - scroll_position);
-        window.scrollBy(0, delta / r.height * document.body.scrollHeight);
-
+        window.scrollBy(0, delta / visible_height(minimap) * document.body.scrollHeight);
 
         scroll_position = y;
     }
