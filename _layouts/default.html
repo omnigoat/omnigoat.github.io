@@ -1,46 +1,50 @@
 <!doctype html>
 <html class="light">
-  <head>
-    <meta charset="utf-8">
-    <title>{{ page.title }}</title>
-    <link rel="stylesheet" href="/assets/css/styles.css" />
-    <link rel="stylesheet" href="/assets/css/syntax.css" />
-  </head>
-  <body class="light">
-    <div class="all-content">
-      <section class="sidebar hide-if-small">
-        <div class="sidebar-avatar">
-          <a class="avatar" href="/"><img src="/assets/img/avatari.png" /></a>
-        </div>
-        <div class="sidebar-blurb hide-if-small">
-          <a class="author title" href="/" >{{site.author.name}}</a>
-          <p class="description">
-            writing about programming, rendering, c++, and other things one should apologise for
-          </p>
-          <p class="navigation">
-            <a class="nav_home" href="/" >home</a>
-            <a class="nav_posts" href="/posts" >posts</a>
-            <a class="nav_about" href="/about">about</a>
-          </p>
-      </section>
-      <section class="content">
-        <section class="posts">
-          {{ content }}
-          {{ content }}
-        </section>
-      </section>
-    </div>
-    <section class="minimap hide-if-medium">
-      <div class="sizer"></div>
-      <div class="contents">
-        <section class="posts">
-          {{ content }}
-          {{ content }}
-        </section>
-      </div>
-      <div class="controller"></div>
-    </section>
-  </body>
+	<head>
+		<meta charset="utf-8">
+		<title>{{ page.title }}</title>
+		<link rel="stylesheet" href="/assets/css/styles.css" />
+		<link rel="stylesheet" href="/assets/css/syntax.css" />
+	</head>
+	<body class="light">
+		<div class="all-content2">
+			<div class="all-content">
+				<section class="sidebar hide-if-small">
+					<div class="sidebar-avatar">
+						<a class="avatar" href="/"><img src="/assets/img/avatari.png" /></a>
+					</div>
+					<div class="sidebar-blurb hide-if-small">
+						<a class="author title" href="/" >{{site.author.name}}</a>
+						<p class="description">
+							writing about programming, rendering, c++, and other things one should apologise for
+						</p>
+						<p class="navigation">
+							<a class="nav_home" href="/" >home</a>
+							<a class="nav_posts" href="/posts" >posts</a>
+							<a class="nav_about" href="/about">about</a>
+						</p>
+				</section>
+				<section class="content">
+					<section class="posts">
+						{{ content }}
 
-  <script src="/assets/js/minimap.js"></script>
+					</section>
+				</section>
+
+			</div>
+
+		</div>
+		<section class="minimap hide-if-medium">
+			<div class="sizer"></div>
+			<div class="contents">
+				<section class="posts">
+					{{ content }}
+
+				</section>
+			</div>
+			<div class="controller"></div>
+		</section>
+	</body>
+
+	<script src="/assets/js/minimap.js"></script>
 </html>

@@ -17,7 +17,7 @@ figure.highlight { display: none; }
 .highlighter-rouge
 {
     min-width: 0;
-    max-width: 60vw;
+    //max-width: 60vw;
 }
 
 pre.highlight > code { white-space: pre-wrap; }
@@ -105,5 +105,3 @@ pre.highlight > code { white-space: pre-wrap; }
 //.highlight .vg { color: #f8f8f2 } /* Name.Variable.Global */
 //.highlight .vi { color: #f8f8f2 } /* Name.Variable.Instance */
 //.highlight .vm { color: #f8f8f2 } /* Name.Variable.Magic */
-
-
