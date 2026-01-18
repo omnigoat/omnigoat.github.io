@@ -14,8 +14,8 @@
 						<div class="sidebar-avatar">
 							<a class="avatar" href="/"><img src="/assets/img/avatari.png" /></a>
 						</div>
-						<button id="myButton" onclick="change_theme('light')">Light</button>
-						<button id="myButton" onclick="change_theme('dark')">Dark</button>
+						<button class="theme-select light" onclick="change_theme('light')"></button>
+						<button class="theme-select dark" onclick="change_theme('dark')"></button>
 					</div>
 
 					<div class="sidebar-blurb">
@@ -40,9 +40,9 @@
 			<section class="minimap hide-if-medium">
 				<div class="sizer"></div>
 				<div class="contents">
-					<section class="inner-contents">
+					<div class="inner-contents">
 						{{ content }}
-					</section>
+					</div>
 				</div>
 				<div class="controller"></div>
 			</section>

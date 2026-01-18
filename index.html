@@ -2,15 +2,18 @@
 title: Home
 layout: default
 ---
-{% for post in paginator.posts %}
-	<section class="post">
-		<h1>
-		<a class="paginated-post-title" href="{{ post.url }}">
-			{{ post.title }}
-		</a>
-		</h1>
-		<span class="post-date">{{ post.date | date_to_string }}</span>
-		{{ post.content }}
+{% for post in site.posts %}
+	<section class="post excerpt">
+		<section class="overlay-contents">
+			<h1>
+			<a class="paginated-post-title" href="{{ post.url }}">
+				{{ post.title }}
+			</a>
+			</h1>
+			<span class="post-date">{{ post.date | date_to_string }}</span>
+			{{ post.content | truncatewords: 100 }}
+		</section>
+		<div class="overlay"></div>
 	</section>
 {% endfor %}
 

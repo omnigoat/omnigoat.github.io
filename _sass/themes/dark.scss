@@ -25,7 +25,6 @@ body
 
 .inner-contents
 {
-	background-color: #333;
 	color: #c7c7c7;
 }
 
@@ -131,8 +130,9 @@ body
 		text-decoration-color: red;
 		&:hover
 		{
+			color: #faa;
 			text-decoration-color: #d33;
-			text-shadow: 0 0 1em #d33;
+			text-shadow: 0 0 1em #f33;
 		}
 	}
 
@@ -141,6 +141,7 @@ body
 		text-decoration-color: #283;
 		&:hover
 		{
+			color: #afd;
 			text-decoration-color: #393;
 			text-shadow: 0 0 1em #393;
 		}
@@ -151,9 +152,69 @@ body
 		text-decoration-color: #25f;
 		&:hover
 		{
+			color: #adf;
 			text-decoration-color: #3af;
 			text-shadow: 0 0 1em #3af;
 		}
+	}
+}
+
+
+.post
+{
+	background-color: #333;
+	a.paginated-post-title
+	{
+		color: #448;
+		font-size: 1.25em;
+
+		&:visited
+		{
+			//color: yellow;
+		}
+	}
+}
+
+
+.inner-contents .post:not(:last)
+{
+	margin-bottom: 2em;
+	//position: relative;
+}
+
+
+///
+/// EXCERPTS
+///
+.post.excerpt
+{
+	position: relative;
+	marign-bottom: 2em;
+}
+
+.post.excerpt .overlay-contents
+{
+	position: relative;
+}
+
+.post.excerpt .overlay
+{
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	z-index: 999;
+	background-image: linear-gradient(to bottom, transparent 50%, $background 90%);
+}
+
+.post.excerpt .paginated-post-title
+{
+	color: #ff5057;
+	line-height: 1em;
+	&:hover
+	{
+		color: #f66;
+		text-decoration-color: #f46;
+		text-shadow: 0 0 0.25em #d33;
 	}
 }
 

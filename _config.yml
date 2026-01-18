@@ -1,6 +1,6 @@
 title:        'hello.'
 tagline:      'omni blogs'
-description:  'this is a programming blog, capiche?'
+description:  'a blog like any other'
 url:          http://omnigoat.github.io
 version:      1.1.1
 author:
@@ -15,6 +15,7 @@ permalink:    pretty
 paginate: 2
 plugins: [jekyll-paginate]
 include: [.well-known]
+page_excerpts: true
 defaults:
   - scope:
       path: "assets/img"
