@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () =>
 
 		//sizer.style.paddingTop = 100 * o + "%";
 		sizer.style.paddingTop = o * minimap.clientWidth * wy + "px";
-		contents.style.height = (100 / w) * wy + "%";
+		//contents.style.height = (100 / w) * wy + "%";
 		contents.style.width = 100 / w + "%";
 		contents.style.transform = `scale(${w}, ${w * wy})`;
 
