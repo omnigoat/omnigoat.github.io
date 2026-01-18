@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () =>
 	var sizer = document.querySelector(".minimap .sizer");
 	var controller = document.querySelector(".minimap .controller");
 	var contents = document.querySelector(".minimap .contents");
-	var scroll_target = document.querySelector("section.content section.posts");
+	var scroll_target = document.querySelector("section.contents section.inner-contents");
 
 
 	// width ratio from scroll-target -> minimap
@@ -213,3 +213,11 @@ document.addEventListener("DOMContentLoaded", () =>
 
 	resize_minimap();
 });
+
+
+function try_dark()
+{
+	var html = document.documentElement;
+	html.classList.remove("light");
+	html.classList.add("dark");
+}

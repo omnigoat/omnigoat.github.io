@@ -10,38 +10,80 @@ body
 {
 	margin: 0;
 	padding: 0;
-	//overflow: hidden !important;
-	scrollbar-width: none;
-
+	font-size: 1.1rem;
+	tab-size: 4;
 }
 
-// all-content
-.all-content2
-{
-	display: flex;
-	justify-content: center;
-	//overflow: none;
-	//> * { flex:  1; }
-}
-
+// contains left-content and minimap
 .all-content
 {
 	display: flex;
+	justify-content: center;
+}
+
+// contains sidebar & content
+.left-content
+{
+	display: flex;
 	justify-content: start;
-	//margin: 0 auto;
-	//margin-left: -22rem;
 	max-width: 80rem;
 	overflow: visible;
 	transform: translateX(-9rem);
-	//padding-right: 10rem;
-	//flex: rem;
-	//> * { flex:  1; }
 }
 
-//
-// minimap
-// -------------
-//
+
+///
+/// sidebar
+/// ---------
+///
+.sidebar
+{
+	position: sticky;
+	width: 18rem;
+	max-width: 18em;
+	height: 100vh;
+	top: 0;
+	display: flex;
+	flex-flow: column;
+	padding: 1em;
+	justify-content: space-between;
+}
+
+// avatar
+.sidebar-avatar
+{
+	display: flex;
+	justify-content: space-around;
+	flex-flow: column;
+}
+
+.sidebar-avatar img
+{
+	padding: 1em;
+	width: 100%;
+	background-color: transparent;
+}
+
+
+
+///
+/// contents
+/// ----------
+///
+.contents
+{
+	max-width: 48em;
+	margin: 0;
+	padding: 0;
+}
+
+
+
+
+///
+/// minimap
+/// -------------
+///
 .minimap
 {
 	width: 6rem;
@@ -50,13 +92,6 @@ body
 	height: 100%;
 	margin-left: 2.25rem;
 	transform: translateX(-9rem);
-	//right: 0.25rem;
-	//left: 50%;
-
-
-	//z-index: 999;
-
-	//transform: translateX(30rem);
 }
 
 .minimap .contents
@@ -75,11 +110,6 @@ body
 	filter: blur(0.25em);
 }
 
-.minimap .contents .post
-{
-	//padding: 2rem;
-}
-
 .minimap .controller
 {
 	position: absolute;
@@ -93,72 +123,6 @@ body
 	//backdrop-filter: invert(1);
 }
 
-// .minimap:hover .controller
-// {
-//	 opacity: 0.2;
-//
-// }
-
-// .minimap:hover .controller:hover
-// {
-//	 opacity: 0.3;
-//	 transition: opacity 0.05s ease-in-out;
-// }
-
-//
-// sidebar
-// ---------
-//
-.sidebar
-{
-	position: sticky;
-
-	width: 18rem;
-	bottom: 0;
-	display: flex;
-	flex-flow: column;
-	padding: 1em;
-	justify-content: space-between;
-}
-
-// avatar
-.sidebar-avatar
-{
-	display: flex;
-	justify-content: space-around;
-}
-
-.sidebar-avatar img
-{
-	padding: 1em;
-	width: 100%;
-	background-color: transparent;
-}
-
-//
-// content
-//
-.content
-{
-	//margin-left: 16rem;
-	//padding-left: 2rem;
-	//max-width: 28em;
-	margin: 0;
-	padding: 0;
-	//overflow: wrap;
-}
-
-.sidebar
-{
-	position: sticky;
-	top: 0px;
-
-	max-width: 18em;
-	height: 100vh;
-
-	font-size: 1rem !important;
-}
-
 .banner
 {
 	min-height: 300px;
@@ -166,100 +130,44 @@ body
 	margin-bottom: 0.33lh;
 }
 
-.posts
+
+// NOTE: by design this applies to both the main
+// contents and the minimap contents
+.inner-contents
 {
-	padding: 2em;
-	padding-top: 4em;
+	padding: 2.5em;
 	max-width: 48em;
 }
 
 
 
-body
-{
-	font-size: 1.1em;
-	//line-height: 1.33em;
-	tab-size: 4;
-}
-
 h2
 {
-	margin-top: 1.9em;
-}
-
-code:not(.highlight code)
-{
-	background-color: #e0e0d0;
-	margin-left: 0.0ch;
-	margin-right: 0.0ch;
-	padding-left: 0.2ch;
-	padding-right: 0.2ch;
-	font-size: 1.025em;
+	margin-top: 1.85em;
 }
 
 
-///////
+
 ///
+/// Responsive Sizing
+/// --------------------
 ///
-///  DYNAMIC SIZING
-///
-///
 
-
-// @media (min-width: 32rem)
-// {
-//	 .sidebar .avatar:after
-//	 {
-//		 content: "32rem";
-//		 text-align: right;
-//		 display: block;
-//		 width: 100%;
-//	 }
-
-//	 .sidebar
-//	 {
-//		 font-size: 0.7rem !important;
-//	 }
-// }
-
-// @media (min-width: 70rem)
-// {
-//	 .sidebar .avatar:after
-//	 {
-//		 content: "70rem";
-//		 text-align: right;
-//		 display: block;
-//		 width: 100%;
-//	 }
-
-//	 .all-content
-//	 {
-//		 justify-content: center;
-//	 }
-// }
-
-
+// xl: 80rem to 96rem
 @media (width < 96rem)
 {
-	.all-content2
+	.all-content
 	{
 		justify-content: left;
 	}
 
-	.all-content
+	.left-content
 	{
 		transform: none;
 		margin-left: 0;
 		//min-left: 18rem;
 	}
 
-	//.sidebar
-	//{
-	//	position: fixed;
-	//	left: 0;
-	//	top: 0;
-	//	height: 100%;
-	//}
 	.minimap
 	{
 		position: fixed;
@@ -269,7 +177,7 @@ code:not(.highlight code)
 	}
 }
 
-// large to XL
+// large: 72rem to 80rem
 @media (width < 80rem)
 {
 	.sidebar
@@ -284,95 +192,36 @@ code:not(.highlight code)
 		width: 100%;
 	}
 
-	.posts
-	{
-		//max-width: 100%;
-	}
-
-	.all-content
+	.left-content
 	{
 		justify-content: center;
 		max-width: auto;
 	}
 
+	.minimap
+	{
+		right: 0rem;
+	}
+}
+
+// medium: 64rem to 72rem (we have fudged it a little)
+@media (width < 72rem)
+{
 	.hide-if-medium
 	{
 		display: none !important;
 	}
-
 }
 
-// medium to large
-@media (width < 72rem)
+// small-medium: 56rem to 64rem
+@media (width < 64rem)
+{}
+
+// small: 48rem to 56rem
+@media (width < 56rem)
 {
-	.all-content2
-	{
-		justify-content: center;
-	}
-
-	.posts
-	{
-		margin-left: 0;
-	}
-
-	.content
-	{
-		margin-left: 0 !important;
-		padding-left: 0 !important;
-	}
-
 	.hide-if-small
 	{
 		display: none !important;
 	}
 }
-
-// @media (min-width: 104rem)
-// {
-//	.sidebar .avatar:after
-//	 {
-//		 content: "96rem";
-//		 text-align: right;
-//		 display: block;
-//		 width: 100%;
-//	 }
-
-//	 .sidebar
-//	 {
-//		 position: sticky;
-//		 top: 0px;
-//		 margin: 0;
-//		 padding: 0;
-
-//		 max-width: 18em;
-//		 height: 100vh;
-
-//		 font-size: 1rem !important;
-//	 }
-
-//	 .content
-//	 {
-//		 //margin: 0 0 !important;
-//		 margin-left: auto !important;
-//		 //min-width: 48rem;
-//		 //max-width: 64rem;
-//	 }
-
-//	 .all-content
-//	 {
-//		 display: flex;
-//		 justify-content: center;
-//		 margin: 0 auto;
-//		 transform: translateX(-9em);
-//		 max-width: 64rem;
-//		 //> * { flex:  1; }
-//	 }
-// }
-
-// @media screen and (max-width: 48rem)
-// {
-//	 .hide-if-small
-//	 {
-//		 display: none !important;
-//	 }
-// }

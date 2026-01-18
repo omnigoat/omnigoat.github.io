@@ -96,7 +96,7 @@ I'm offended you made me write this caveat out.
  4    {
  5      namespace diagnostics
  6      {
- 7         // kill me I am not typing "hani::logging::diagnostics" to
+ 7        // kill me I am not typing "hani::logging::diagnostics" to
  8        // use this bit of your library
  9      }
 10    }

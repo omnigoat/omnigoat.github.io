@@ -1,40 +1,46 @@
 <!doctype html>
-<html class="light">
+<html class="dark">
 	<head>
 		<meta charset="utf-8">
 		<title>{{ page.title }}</title>
 		<link rel="stylesheet" href="/assets/css/styles.css" />
 		<link rel="stylesheet" href="/assets/css/syntax.css" />
 	</head>
-	<body class="light">
-		<div class="all-content2">
-			<div class="all-content">
+	<body>
+		<div class="all-content">
+			<div class="left-content">
 				<section class="sidebar hide-if-small">
-					<div class="sidebar-avatar">
-						<a class="avatar" href="/"><img src="/assets/img/avatari.png" /></a>
+					<div class="sidebar-top-content">
+						<div class="sidebar-avatar">
+							<a class="avatar" href="/"><img src="/assets/img/avatari.png" /></a>
+						</div>
+						<button id="myButton" onclick="change_theme('light')">Light</button>
+						<button id="myButton" onclick="change_theme('dark')">Dark</button>
 					</div>
-					<div class="sidebar-blurb hide-if-small">
+
+					<div class="sidebar-blurb">
 						<a class="author title" href="/" >{{site.author.name}}</a>
 						<p class="description">
-							writing about programming, rendering, c++, and other things one should apologise for
+							writing about programming, rendering, c++, and other things for which one should apologise
 						</p>
 						<p class="navigation">
 							<a class="nav_home" href="/" >home</a>
 							<a class="nav_posts" href="/posts" >posts</a>
 							<a class="nav_about" href="/about">about</a>
 						</p>
+					</div>
+
 				</section>
-				<section class="content">
-					<section class="posts">
+				<section class="contents">
+					<section class="inner-contents">
 						{{ content }}
 					</section>
 				</section>
-
 			</div>
-			<section class="minimap hide-if-small">
+			<section class="minimap hide-if-medium">
 				<div class="sizer"></div>
 				<div class="contents">
-					<section class="posts">
+					<section class="inner-contents">
 						{{ content }}
 					</section>
 				</div>
@@ -45,4 +51,14 @@
 	</body>
 
 	<script src="/assets/js/minimap.js"></script>
+	<script>
+
+	function change_theme(theme_name)
+	{
+		var html = document.documentElement;
+		html.className = '';
+		html.classList.add(theme_name);
+	}
+
+	</script>
 </html>
