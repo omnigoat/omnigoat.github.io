@@ -1,5 +1,3 @@
-@use "theme" as *;
-
 // all elements
 *
 {
@@ -18,18 +16,51 @@ body
 .all-content
 {
 	display: flex;
-	justify-content: center;
+	justify-content: left;
+	align-items: stretch;
 }
 
 // contains sidebar & content
 .left-content
 {
 	display: flex;
-	justify-content: start;
-	max-width: 80rem;
+	justify-content: right;
+	flex-grow: 1;
+	//max-width: 80rem;
 	overflow: visible;
-	transform: translateX(-9rem);
 }
+
+.center-content
+{
+	display: flex;
+	justify-content: center;
+	flex-grow: 3;
+	max-width: 52rem;
+	margin: auto;
+}
+
+.right-content
+{
+	display: flex;
+	flex-grow: 2;
+	justify-content: left;
+
+	> *
+	{
+		display: flex;
+	}
+
+	.left-spacer
+	{
+		width: 6rem;
+	}
+
+	.right-spacer
+	{
+		flex-grow: 1;
+	}
+}
+
 
 
 ///
@@ -72,7 +103,7 @@ body
 ///
 .contents
 {
-	max-width: 48em;
+	//max-width: 48em;
 	margin: 0;
 	padding: 0;
 }
@@ -86,12 +117,13 @@ body
 ///
 .minimap
 {
+	//display: flex;
 	width: 6rem;
 	position: sticky;
 	top: 0;
-	height: 100%;
-	margin-left: 2.25rem;
-	transform: translateX(-9rem);
+	height: 100vh;
+	//padding-left: 6rem;
+	//transform: translateX(-9rem);
 }
 
 .minimap .contents
@@ -135,8 +167,8 @@ body
 // contents and the minimap contents
 .inner-contents .post
 {
-	padding: 2.5em;
-	max-width: 48em;
+	padding: 4rem;
+	//max-width: 48em;
 }
 
 button
@@ -150,15 +182,17 @@ button
 	cursor: pointer;
 }
 
-button.theme-select.light
+button.select-theme.theme-light
 {
-	background-color: #ffd;
+	background-color: #eee;
 }
 
-button.theme-select.dark
+button.select-theme.theme-dark
 {
 	background-color: #333;
 }
+
+
 
 h2
 {
@@ -171,6 +205,13 @@ h2
 /// Responsive Sizing
 /// --------------------
 ///
+@media (width > 128rem) { .mediasize::after { content: "size: way-big"; } }
+@media (width < 128rem) { .mediasize::after { content: "size: 2xl"; } }
+@media (width < 96rem) { .mediasize::after { content: "size: xl"; } }
+@media (width < 80rem) { .mediasize::after { content: "size: large"; } }
+@media (width < 72rem) { .mediasize::after { content: "size: medium"; } }
+@media (width < 64rem) { .mediasize::after { content: "size: small-medium"; } }
+@media (width < 54rem) { .mediasize::after { content: "size: small"; } }
 
 // xl: 80rem to 96rem
 @media (width < 96rem)
@@ -187,12 +228,27 @@ h2
 		//min-left: 18rem;
 	}
 
-	.minimap
+	.right-content
 	{
-		position: fixed;
-		right: 0.25rem;
-		transform: none;
-		margin-left: 0;
+		justify-content: right;
+
+		.left-spacer
+		{
+			width: auto;
+			flex-grow: 1;
+		}
+
+		.minimap
+		{
+			transform: none;
+			margin-left: 0;
+			padding: 0;
+		}
+
+		.right-spacer
+		{
+			display: none;
+		}
 	}
 }
 

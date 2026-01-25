@@ -5,13 +5,13 @@ title: The Difficult Second Update
 
 So I burnt out a bit towards the end of last year, just as I started this blog - perhaps because I did. Either way, it went dead. And that isn't cool. But now I'm back, ready to continue working on [shiny][shiny], voxelizing things. This post is going to basically be a bit of an algorithm/code dump. But that's cool, because it's hard to find this stuff explained online.
 
-### Triangle-AABB Intersections
+## Triangle-AABB Intersections
 
 Finding a modern algorithm for AABB-triangle intersection wasn't terribly difficult. All the major papers I have previously mentioned (in my only other blog post to date) reference the same one: [Fast Parallel Surface and Solid Voxelization on GPUs - Schwarz-Seidel 2010][schwarz_seidel]. As their paper mentions, this algorithm expands into fewer instructions than the standard Seperating Axis Theorem-based algorithm, by [Akenine-Möller][akemol]. The SAT-based algorithm is the easiest thing to find on the web when you search for triangle-box intersection. It's also crazy-full of macros. I can't imagine anyone uses it without modifying it first.
 
 For now, I've decided to first generate Sparse Voxel Octrees "offline". For you kids not in the know, that means before the application runs - a build step. After I get that all working, I'll try and GPU-accelerate it. Eventually, ideally, the voxelization pipeline will be flexible enough to voxelize large data-sets offline, and smaller objects in real-time, a la Crassin et al. But first we need to correctly intersect boxes and triangles.
 
-### The Algorithm, An Explanation
+## The Algorithm, An Explanation
 
 This algorithm is nice because it allows for a bunch of per-triangle setup to be done, and then minimal intructions performed per-voxel. 
 
@@ -23,7 +23,7 @@ So, referencing our [paper][schwarz_seidel], I'll outline how it works very quic
 
 Step 1 is incredibly obvious and is performed in every algorithm I ever saw. Step 2 requires calculating something called the *critical point*, in relation to the triangle-normal. If you imagine a light being shone from very far away, in the direction of the triangle-normal, then the critical-point would be the first (closest) point hit by the incoming light. Honestly it was easy to blindly implement Step 2 so I didn't really pay much attention. Step 3 was *far* more difficult, because of how Schwarz & Seidel decided to write their paper. Rather than continue describing the algorithm in abstract, they instead describe the rest of the per-axis-plane algorithm in terms of the xy-plane. Which would be fine, save for that they don't mention which other two planes should also be implemented. So silly old me implemented the xy-plane, the xz-plane, and the yz-plane. Spot the error? Yeah, it should be the zx-plane, not the xz-plane. I still don't know why that's important, but it's the difference between happiness and sadness.
 
-### The Algorithm, Implementation
+## The Algorithm, Implementation
 
 Here I've just code-dumped the algorithm in C++. I think it's readable enough. Keep in mind I use homogenous coordinates (points have 1.f in the w-component, vectors have 0.f). I haven't yet figured out how to format it nicely so it scrolls horizontally yet.
 
@@ -125,5 +125,3 @@ inline auto intersect_aabb_triangle(aabb_t const& box, triangle_t const& tri) ->
 [shiny]: http://github.com/omnigoat/shiny
 [schwarz_seidel]: http://research.michael-schwarz.com/publ/files/vox-siga10.pdf
 [akemol]: http://fileadmin.cs.lth.se/cs/Personal/Tomas_Akenine-Moller/code/
-
-

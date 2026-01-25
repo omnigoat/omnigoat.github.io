@@ -213,3 +213,35 @@ document.addEventListener("DOMContentLoaded", () =>
 
 	resize_minimap();
 });
+
+function set_theme(theme_name)
+{
+	var html = document.documentElement;
+	html.className = '';
+	html.classList.add(theme_name);
+	localStorage.setItem('theme', theme_name);
+}
+
+(function ()
+{
+	const re = /theme-([\w-]+)/;
+
+	// immediately set theme if encountered before
+	const theme = localStorage.getItem('theme');
+	if (theme)
+	{
+		set_theme(theme);
+	}
+	else
+	{
+		const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+		set_theme(prefersDark ? 'dark' : 'light');
+	}
+
+	document.addEventListener('DOMContentLoaded', () => {
+		document.querySelectorAll('.select-theme').forEach((x) => {
+			const theme = x.className.match(re);
+			x.onclick = function () { set_theme(theme[1]); };
+		});
+	});
+})();

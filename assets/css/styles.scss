@@ -1,4 +1,11 @@
 ---
-# Only the main Sass file needs front matter (the dashes are enough)
 ---
+@use "sass:meta";
 @use "main" as *;
+
+{% for theme in site.data.themes %}
+	.{{theme}}
+	{
+		@include meta.load-css(themes/{{theme}});
+	}
+{% endfor %}

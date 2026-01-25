@@ -14,38 +14,47 @@
 						<div class="sidebar-avatar">
 							<a class="avatar" href="/"><img src="/assets/img/avatari.png" /></a>
 						</div>
-						<button class="theme-select light" onclick="change_theme('light')"></button>
-						<button class="theme-select dark" onclick="change_theme('dark')"></button>
+						{% for theme in site.data.themes %}
+							<!-- wrap each button in div of its own theme-name, so per-theme styling can affect it -->
+							<div class="{{theme}}" style="display: inline;"">
+								<button class="select-theme theme-{{theme}}"></button>
+							</div>
+						{% endfor %}
 					</div>
-
 					<div class="sidebar-blurb">
 						<a class="author title" href="/" >{{site.author.name}}</a>
 						<p class="description">
 							writing about programming, rendering, c++, and other things for which one should apologise
 						</p>
+						<p class="mediasize"></p>
 						<p class="navigation">
 							<a class="nav_home" href="/" >home</a>
 							<a class="nav_posts" href="/posts" >posts</a>
 							<a class="nav_about" href="/about">about</a>
 						</p>
 					</div>
-
 				</section>
+			</div>
+			<div class="center-content">
 				<section class="contents">
 					<section class="inner-contents">
 						{{ content }}
 					</section>
 				</section>
 			</div>
-			<section class="minimap hide-if-medium">
-				<div class="sizer"></div>
-				<div class="contents">
-					<div class="inner-contents">
-						{{ content }}
+			<div class="right-content">
+				<div class="left-spacer"></div>
+				<section class="minimap hide-if-medium">
+					<div class="sizer"></div>
+					<div class="contents">
+						<div class="inner-contents">
+							{{ content }}
+						</div>
 					</div>
-				</div>
-				<div class="controller"></div>
-			</section>
+					<div class="controller"></div>
+				</section>
+				<!--<div class="right-spacer"></div>-->
+			</div>
 		</div>
 
 	</body>

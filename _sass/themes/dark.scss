@@ -1,27 +1,53 @@
+@use 'sass:color';
 
-
-$void: #222;
-$background: #333;
+$void: #1a1a1a;
+$background: #2a2a2a;
 
 $link-background: #f7f7f0;
 $color-link: #662;
 $color-highlight: #ba0;
 
 // title-styling
-$title-color: #554;
-$title-hover-color: #fa6;
+$post-title-color: #ff5057;
+$post-title-hover-color: #ff575f;
+$post-title-hover-text-decoration-color: #f46;
+$post-title-hover-text-shadow-color: #d33;
 
+$post-author-color: color.scale($background, $lightness: 30%);
 
+$post-hyperlink-color: #6ae;
+//$post-hyperlink-color: #ff7777;
+$post-hyperlink-hover-color: color.scale($post-hyperlink-color, $lightness: 33%);
+$post-hyperlink-visited-color: color.scale($post-hyperlink-color, $lightness: -15%);
 
-.post-title
+button.select-theme.theme-dark
 {
-	font-family: Webdings;
+	background-color: #333;
 }
+
 
 body
 {
-	background-color: #222;
+	background-color: $void;
 }
+
+
+//
+.right-content
+{
+	.left-spacer
+	{
+		background: $background;
+	}
+
+	.right-spacer
+	{
+		background: $void;
+	}
+}
+
+
+
 
 .inner-contents
 {
@@ -33,7 +59,7 @@ body
 	font-family: Georgia;
 	padding-top: 2.5em;
 	padding-bottom: 2em;
-	margin-bottom: 2em;
+	padding-left: 3rem;
 	line-height: 1.5em;
 
 	h2
@@ -49,20 +75,6 @@ body
 	font-family: Arial;
 }
 
-.post-title
-{
-	font-size: 3em;
-	color: $title-color;
-	margin-bottom: 0;
-	font-family: Arial;
-}
-
-.post-author
-{
-	margin-top: 0.5lh;
-	padding-left: 0.5ch;
-	color: #aa9;
-}
 
 
 
@@ -127,7 +139,7 @@ body
 
 	&.nav_home
 	{
-		text-decoration-color: red;
+		text-decoration-color: #f00;
 		&:hover
 		{
 			color: #faa;
@@ -159,11 +171,15 @@ body
 	}
 }
 
-
+///
+/// POST
+/// --------
+///
 .post
 {
-	background-color: #333;
-	a.paginated-post-title
+	background-color: $background;
+
+	.paginated-post-title
 	{
 		color: #448;
 		font-size: 1.25em;
@@ -172,6 +188,44 @@ body
 		{
 			//color: yellow;
 		}
+	}
+
+	.post-title
+	{
+		font-size: 5em;
+		color: #ff5057;
+		line-height: 1em;
+		font-family: Arial;
+		margin-bottom: 0;
+		margin-top: 0;
+
+		//text-shadow: 0 0 1em color.adjust($post-title-hover-text-shadow-color, $red: 255);
+
+		&:hover
+		{
+			color: $post-title-hover-color;
+			text-decoration-color: $post-title-hover-text-decoration-color;
+			text-shadow: 0 0 1em $post-title-hover-text-shadow-color;
+		}
+	}
+
+	.post-author
+	{
+		padding-left: 0.5em;
+		color: $post-author-color;
+		margin-top: 0;
+		margin-bottom: 3em;
+	}
+
+
+	// GENERAL TEXT ELEMENTS
+	a
+	{
+		color: $post-hyperlink-color;
+
+		&:hover { color: $post-hyperlink-hover-color; }
+		&:visited { color: $post-hyperlink-visited-color; }
+		&:hover:visited { color: color.scale($post-hyperlink-color, $lightness: -10%); }
 	}
 }
 
