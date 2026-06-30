@@ -224,7 +224,8 @@ function set_theme(theme_name)
 
 (function ()
 {
-	const re = /theme-([\w-]+)/;
+	// word boundary required because 'ct' (current theme) clashes with seleCT-theme!
+	const re = /\bct-[\w-]+/;
 
 	// immediately set theme if encountered before
 	const theme = localStorage.getItem('theme');
@@ -234,14 +235,14 @@ function set_theme(theme_name)
 	}
 	else
 	{
-		const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-		set_theme(prefersDark ? 'dark' : 'light');
+		const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+		set_theme(prefersLight ? 'ct-light' : 'ct-dark');
 	}
 
 	document.addEventListener('DOMContentLoaded', () => {
 		document.querySelectorAll('.select-theme').forEach((x) => {
 			const theme = x.className.match(re);
-			x.onclick = function () { set_theme(theme[1]); };
+			x.onclick = function () { set_theme(theme[0]); };
 		});
 	});
 })();

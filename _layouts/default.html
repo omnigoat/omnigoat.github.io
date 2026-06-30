@@ -14,10 +14,10 @@
 						<div class="sidebar-avatar">
 							<a class="avatar" href="/"><img src="/assets/img/avatari.png" /></a>
 						</div>
+						<!-- wrap each button in div of its own theme-name, so per-theme styling can affect it -->
 						{% for theme in site.data.themes %}
-							<!-- wrap each button in div of its own theme-name, so per-theme styling can affect it -->
-							<div class="{{theme}}" style="display: inline;"">
-								<button class="select-theme theme-{{theme}}"></button>
+							<div class="ct-{{theme}}" style="display: inline;"">
+								<button class="select-theme ct-{{theme}}"></button>
 							</div>
 						{% endfor %}
 					</div>

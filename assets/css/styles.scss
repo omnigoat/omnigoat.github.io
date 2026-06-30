@@ -4,7 +4,7 @@
 @use "main" as *;
 
 {% for theme in site.data.themes %}
-	.{{theme}}
+	.ct-{{theme}}
 	{
 		@include meta.load-css(themes/{{theme}});
 	}
