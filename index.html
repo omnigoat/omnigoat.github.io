@@ -4,21 +4,23 @@ layout: default
 ---
 {% for post in site.posts %}
 	<section class="post excerpt">
-		<section class="overlay-contents">
-			<h1>
-			<a class="paginated-post-title" href="{{ post.url }}">
-				{{ post.title }}
-			</a>
-			</h1>
-			<span class="post-date">{{ post.date | date_to_string }}</span>
-			{{ post.content | truncatewords: 100 }}
-		</section>
+		<a href="{{post.url}}" class="link-wrapper">
+			<section class="overlay-contents">
+				<h1>
+					<a class="paginated-post-title" href="{{ post.url }}">
+						{{ post.title }}
+					</a>
+				</h1>
+				<span class="post-date">{{ post.date | date_to_string }}</span>
+				{{ post.content | truncatewords: 50 }}
+			</section>
+		</a>
 		<div class="overlay"></div>
 	</section>
 {% endfor %}
 
 <!-- Pagination links -->
-<div class="pagination">
+<!-- <div class="pagination">
 	{% if paginator.next_page %}
 	<a href="/page{{paginator.next_page}}" class="older">Older</a>
 	{% else %}
@@ -33,4 +35,4 @@ layout: default
 	{% else %}
 	<span class="previous">Newer</span>
 	{% endif %}
-</div>
+</div> -->

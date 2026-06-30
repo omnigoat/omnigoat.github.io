@@ -20,7 +20,7 @@ $post-hyperlink-color: #ff7767;
 $post-hyperlink-hover-color: color.scale($post-hyperlink-color, $lightness: 25%);
 $post-hyperlink-visited-color: color.scale($post-hyperlink-color, $lightness: -15%);
 
-
+$post-highlight: #6662;
 
 // first, our selection button
 button.select-theme.ct-dark
@@ -67,7 +67,7 @@ body
 
 	.title
 	{
-		font-family: "ff-tisa-web-pro", "IBM Plex Serif", Georgia, "Times New Roman", serif;
+		font-family: Arial, "ff-tisa-web-pro", "IBM Plex Serif", Georgia, "Times New Roman", serif;
 		font-size: 4em;
 		text-align: left;
 		color: #ff5057;
@@ -90,8 +90,8 @@ body
 	.description
 	{
 		font-family: georgia;
-		font-size: 1em;
-		line-height: 1.5em;
+		font-size: 1.1em;
+		line-height: 1.25em;
 	}
 
 	.navigation a
@@ -144,7 +144,10 @@ body
 /// center-content
 /// ----------------
 ///
-
+.center-content
+{
+	background-color: $background;
+}
 
 ///
 /// POST
@@ -227,30 +230,34 @@ body
 ///
 /// EXCERPTS
 ///
-.post.excerpt
+.center-content .post.excerpt
 {
 	position: relative;
-	//margin-bottom: 2em;
-
-	&::after
+	//cursor: pointer;
+	.paginated-post-title
 	{
-		content: '';
-		position: absolute;
-		top: 0; left: 0; right: 0; bottom: 0;
-		background: linear-gradient(to bottom, $background 0, transparent 5%, transparent 95%, $background 100%); /* Hover Gradient */
-		opacity: 0;
-		width: 100%;
-		z-index: 1;
-		//transition: opacity 0.1s ease;
+		color: #ff5057;
+		line-height: 1em;
+		&:hover
+		{
+			color: #f66;
+			text-decoration-color: #f46;
+			text-shadow: 0 0 0.25em #d33;
+		}
+	}
+
+	&:hover .paginated-post-title
+	{
+		color: #f66;
+		text-decoration-color: #f46;
+		text-shadow: 0 0 0.25em #d33;
 	}
 
 	&:hover
 	{
-		background-color: #222;
-		&::after
-		{
-			opacity: 1;
-		}
+		background-color: $post-highlight;
+			//linear-gradient(to bottom, $background 0, $post-highlight 5%, $post-highlight 95%, $background 100%),
+			//linear-gradient(to right, $post-highlight 50%, $background 90%);
 	}
 }
 
@@ -265,29 +272,10 @@ body
 	inset: 0;
 	pointer-events: none;
 	z-index: 999;
-	//background-image: linear-gradient(to bottom, transparent 50%, $background 90%);
+	background-image: linear-gradient(to bottom, transparent 50%, $background 90%);
 
-	transition: background-image 0.4s ease-in-out
+	//transition: background-image 0.4s ease-in-out
 }
-
-.post.excerpt .paginated-post-title
-{
-	color: #ff5057;
-	line-height: 1em;
-	&:hover
-	{
-		color: #f66;
-		text-decoration-color: #f46;
-		text-shadow: 0 0 0.25em #d33;
-	}
-}
-
-//.overlay-contents:hover
-//{
-//	//box-shadow: 0 0 20px rgba(0, 0, 0, 1);
-//	//background: #222;
-//}
-
 
 
 // paragraph code
