@@ -29,9 +29,8 @@ body
 .left-content
 {
 	display: flex;
-	justify-content: right;
 	flex-grow: 1;
-	overflow: visible;
+	justify-content: right;
 
 	.sidebar
 	{
@@ -73,21 +72,19 @@ body
 ///
 .center-content
 {
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: center;
-	align-items: stretch;
-	flex-grow: 3;
+	flex-grow: 1;
 	max-width: 52rem;
-	margin: auto;
+	//margin: auto;
 
 	.contents
 	{
-		display: flex;
-		flex-flow: row nowrap;
-		justify-content: center;
-		align-items: stretch;
-		flex-grow: 3;
+		//display: flex;
+		//flex-flow: row nowrap;
+		//justify-content: center;
+		//align-items: stretch;
+		//flex-grow: 3;
+		//max-width: 48em;
+		//padding-bottom: 100vh;
 	}
 
 	.right-spacer
@@ -95,16 +92,16 @@ body
 		width: 6rem;
 		height: 100%;
 	}
-}
 
-a.link-wrapper
-{
-	display: block;
-	position: absolute;
-	left: 0;
-	top: 0;
-	width:100%; 
-	height: 100%;
+	a.link-wrapper
+	{
+		display: block;
+		position: absolute;
+		left: 0;
+		top: 0;
+		width:100%; 
+		height: 100%;
+	}
 }
 
 
@@ -114,10 +111,10 @@ a.link-wrapper
 /// 
 .right-content
 {
-	display: flex;
-	flex-grow: 2;
+	flex-grow: 1.5;
 	justify-content: left;
-
+	display: flex;
+	
 	> *
 	{
 		display: flex;
@@ -131,18 +128,21 @@ a.link-wrapper
 
 
 
+
 ///
-/// contents
-/// ----------
+/// inner-contents
+/// ----------------
+/// (affects both main contents & minimap)
+/// 
+/// add padding at the bottom to reflect the visual studio scroll
+/// experience where we can move past the end of the document, and
+/// place the EOF at the top of the screen. actually that would be
+/// 100vh, 50vh is set here because this is a blog.
 ///
-.contents
+.inner-contents
 {
-	//max-width: 48em;
-	margin: 0;
-	padding: 0;
+	padding-bottom: 50vh;
 }
-
-
 
 
 ///
@@ -151,30 +151,33 @@ a.link-wrapper
 ///
 .minimap
 {
-	//display: flex;
-	width: 6rem;
 	position: sticky;
+	width: 6rem;
 	top: 0;
 	height: 100vh;
-	//padding-left: 6rem;
-	//transform: translateX(-9rem);
 }
 
 .minimap .contents
 {
 	position: absolute;
+	transform-origin: top left;
+	left: 0;
+	top: 0;
 	user-select: none;
 	z-index: -1;
-	transform-origin: top left;
-	//overflow: visible;
+
+	notfornow h1, h2, h3, h4, h5, h6
+	{
+		filter: blur(0.1em);
+	}
+
+	notfornow a, p, span
+	{
+		
+		filter: blur(0.25em);
+	}
 }
 
-.minimap .contents p
-{
-	//color: #555;
-	//background-color: #555;
-	filter: blur(0.25em);
-}
 
 .minimap .controller
 {
@@ -217,6 +220,22 @@ button
 }
 
 
+///
+/// Excerpts
+/// ----------
+///
+.post.excerpt
+{
+	position: relative;
+
+	.overlay
+	{
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		z-index: 999;
+	}
+}
 
 
 h2

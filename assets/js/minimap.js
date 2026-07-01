@@ -4,8 +4,7 @@ document.addEventListener("DOMContentLoaded", () =>
 	var sizer = document.querySelector(".minimap .sizer");
 	var controller = document.querySelector(".minimap .controller");
 	var contents = document.querySelector(".minimap .contents");
-	var scroll_target = document.querySelector("div.inner-contents");
-
+	var scroll_target = document.querySelector(".center-content .inner-contents");
 
 	// width ratio from scroll-target -> minimap
 	var w = 1;
@@ -63,22 +62,39 @@ document.addEventListener("DOMContentLoaded", () =>
 
 	function resize_minimap()
 	{
-		w = minimap.clientWidth / scroll_target.offsetWidth;
+		// make shadow content the same dimensions
+		contents.style.width = `${scroll_target.clientWidth}px`;
+		contents.style.maxWidth = `${scroll_target.clientWidth}px`;
+		contents.style.minWidth = `${scroll_target.clientWidth}px`;
 
-		const mmh = scroll_target.clientHeight * w;
+
+		w = minimap.clientWidth / scroll_target.clientWidth;
+
+		const mmh = scroll_target.offsetHeight * w;
 
 		// set to 1 for interesting results
 		wy = window.innerHeight / mmh;
 
 		var o = scroll_target.offsetHeight / scroll_target.offsetWidth;
 
+		// we're going to set the minimap contents to exactly the same size
+		// as the main contents, and then transform the scale
+		
+		//contents.style.right = -scroll_target.clientWidth;
 		//sizer.style.paddingTop = 100 * o + "%";
-		sizer.style.paddingTop = o * minimap.clientWidth * wy + "px";
+		//sizer.style.paddingTop = o * minimap.clientWidth * wy + "px";
 		//contents.style.height = (100 / w) * wy + "%";
-		contents.style.width = 100 / w + "%";
+		//contents.style.width = 100 / w + "%";
 		contents.style.transform = `scale(${w}, ${w * wy})`;
+		
+		
+		//const elements = document.querySelectorAll('.minimap .contents > *');
+		//elements.forEach(x => {
+		//	//x.style.transform = `scale(0.85)`;
+		//	//x.style.fontSize = '0.5em';
+		//});
 
-		const k = window.innerHeight / scroll_target.offsetWidth;
+		const k = window.innerHeight / scroll_target.clientWidth;
 
 		controller.style.width = minimap.clientWidth + "px";
 		controller.style.height = minimap.clientWidth * k * wy + "px";

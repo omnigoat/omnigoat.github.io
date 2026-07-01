@@ -144,7 +144,7 @@ body
 /// center-content
 /// ----------------
 ///
-.center-content
+.contents
 {
 	background-color: $background;
 }
@@ -222,7 +222,7 @@ body
 
 .inner-contents .post:not(:last)
 {
-	margin-bottom: 2em;
+	//margin-bottom: 2em;
 	//position: relative;
 }
 
@@ -230,52 +230,38 @@ body
 ///
 /// EXCERPTS
 ///
-.center-content .post.excerpt
+.post.excerpt
 {
-	position: relative;
-	//cursor: pointer;
 	.paginated-post-title
 	{
 		color: #ff5057;
 		line-height: 1em;
-		&:hover
+	}
+	
+	.overlay
+	{
+		background-image: linear-gradient(to bottom, transparent 50%, $background 90%);
+	}
+}
+
+// effects (center-content only)
+.center-content .post.excerpt
+{
+	&:hover
+	{
+		background-color: $post-highlight;
+
+		.paginated-post-title
 		{
 			color: #f66;
 			text-decoration-color: #f46;
 			text-shadow: 0 0 0.25em #d33;
 		}
 	}
-
-	&:hover .paginated-post-title
-	{
-		color: #f66;
-		text-decoration-color: #f46;
-		text-shadow: 0 0 0.25em #d33;
-	}
-
-	&:hover
-	{
-		background-color: $post-highlight;
-			//linear-gradient(to bottom, $background 0, $post-highlight 5%, $post-highlight 95%, $background 100%),
-			//linear-gradient(to right, $post-highlight 50%, $background 90%);
-	}
 }
 
-.post.excerpt .overlay-contents
-{
-	position: relative;
-}
 
-.post.excerpt .overlay
-{
-	position: absolute;
-	inset: 0;
-	pointer-events: none;
-	z-index: 999;
-	background-image: linear-gradient(to bottom, transparent 50%, $background 90%);
-
-	//transition: background-image 0.4s ease-in-out
-}
+.inner-contents .post.excerpt 
 
 
 // paragraph code
