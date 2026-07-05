@@ -41,8 +41,8 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.4.1'
-          bundler-cache: false
-
+          bundler-cache: true
+          cache-versions: 0
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
