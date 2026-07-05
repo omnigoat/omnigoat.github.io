@@ -1,5 +1,51 @@
 @use 'sass:color';
 
+
+
+
+
+///
+/// defaults for hyperlinks
+/// --------------------------
+/// 
+@property --post-hyperlink-color
+{
+	syntax: "<color>";
+	inherits: true;
+	initial-value: LinkText;
+}
+
+@property --post-hyperlink-hover-color
+{
+	syntax: "<color>";
+	inherits: true;
+	initial-value: LinkText;
+}
+
+@property --post-hyperlink-visited-color
+{
+	syntax: "<color>";
+	inherits: true;
+	initial-value: VisitedText;
+}
+
+@property --post-hyperlink-visited-hover-color
+{
+	syntax: "<color>";
+	inherits: true;
+	initial-value: VisitedText;
+}
+
+
+
+
+
+
+
+
+
+
+
 // all elements
 *
 {
@@ -180,7 +226,7 @@ body
 		.navigation a
 		{
 			font-family: Helvetica, Arial, "sans-serif";
-			color: #999;
+			color: var(--text-color);
 
 			&:hover
 			{
@@ -222,18 +268,6 @@ body
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -317,7 +351,7 @@ button
 	padding-left: 3rem;
 	line-height: 1.5em;
 
-	font-family: var(--post-body-font-family);
+	font-family: var(--post-font-family);
 	
 	.post-title
 	{
@@ -358,9 +392,9 @@ button
 
 	h2
 	{
-		font-family: var(--post-body-h2-font-family);
+		font-family: var(--post-h2-font-family);
 		margin-top: 1.85em;
-		color: #f79;
+		color: var(--post-h2-color);
 	}
 }
 
@@ -430,58 +464,65 @@ span.theme-icon
 		width: 100%;
 		font-size: 1rem;
 		padding: 0.25em 0em 0.25em 0.5em;
-		border: 1px solid #222;
-		color: #999;
+		border: 1px solid var(--void-accent-color);
+		color: var(--void-foreground-color);
 
 		&::picker(select)
 		{
 			appearance: base-select;
-			bottom: anchor(top);
-			top: auto;
+			bottom: auto;
+			top: anchor(bottom);
 			background: transparent;
-			color: #ddd;
+			color: var(--background-color);
 			border: none;
+		}
+
+		&:open
+		{
+			border-radius: 8px 8px 0 0;
 		}
 
 		option
 		{
-			background: #222;
+			background: var(--background-color);
+			color: var(--text-color);
 
 			// rounded corners
-			&:first-of-type { border-radius: 8px 8px 0 0; }
 			&:last-of-type { border-radius: 0 0 8px 8px; }
-
 			// no checkmark
 			&::checkmark { display: none; }
 
 			&:hover, &:focus
 			{
-				background: #333;
+				background: var(--background-bright-color);
 			}
 
-			&:hover:focus
+			//&:hover:focus
+			//{
+			//	background: var(--background-color);
+			//}
+
+			// span
+			span.theme-icon
 			{
-				background: #222;
+				display: inline-block;
+				margin-right: 1ch;
 			}
 		}
 	}
 
-	
-
-	
-
 	select::picker-icon
 	{
-		//visibility: hidden;
-		content: '✵';
+		content: "❯";
+		rotate: 90deg;
 		margin-right: 0.5em;
 		color: grey;
 	}
 
-
 	select:open::picker-icon
 	{
-		rotate: 180deg;
+		rotate: -90deg;
+		margin-right: 0.5em;
 	}
 
 	

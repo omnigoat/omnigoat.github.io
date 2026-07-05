@@ -47,300 +47,54 @@ $title-color: #554;
 $title-hover-color: #fa6;
 
 
+span.theme-icon.ct-light
+{
+	background-color: $background;
+	border-color: #ddd !important;
+}
+
+
+// base palette
 :root.ct-light
 {
+	--void-color: #e0c7c0;
+	--void-accent-color: #b2b2b0;
+
+	--void-foreground-color: #777;
 	
+	--background-color: #eaeae7;
+	--background-bright-color: #dadad7;
+
+	--foreground-color: #333;
+
+	--accent-color: #4466aa;
+	--accent-color-deep: #35a;
+	--accent-color-bright: #4f70aa;
+	--accent-color-deep-bright: #375faa;
+	--accent-color-dark: #66fa;
+}
+
+// topic palette
+:root.ct-light
+{
+	--text-color: var(--foreground-color);
 
 
-	button.select-theme.ct-light
-	{
-		background-color: #ffe;
-	}
+	--post-highlight-color: #6662;
 
-	span.theme-icon.ct-light
-	{
-		background-color: $background;
-		border-color: #ddd !important;
-	}
+	// post-title
+	--post-title-font: Arial;
+	--post-title-font-size: 5em;
+	--post-title-color: var(--accent-color);
+	--post-title-hover-color: var(--accent-color-bright);
+	--post-title-hover-text-decoration-color: var(--accent-color-deep-bright);
+	--post-title-hover-text-shadow-color: var(--accent-color-dark);
 
+	// post-date
+	--post-date-color: #444;
 
-	body
-	{
-		background-color: $void;
-	}
-
-	// sidebar
-	.sidebar-avatar
-	{
-		background-image: radial-gradient(closest-side, white, $void);
-	}
-
-	.sidebar-blurb
-	{
-		margin: 0 0.5em;
-		//font-size: 1.5em;
-	}
-
-	.sidebar-blurb p
-	{
-		display: flex;
-		justify-content: space-between;
-		font-size: 1.5em;
-	}
-
-	.sidebar-blurb a
-	{
-		font-family: "ff-tisa-web-pro", "IBM Plex Serif", Georgia, "Times New Roman", serif;
-		text-decoration: underline;
-		//margin: 0 0.25em;
-	}
-
-	.sidebar-blurb a.title
-	{
-		font-family: "ff-tisa-web-pro", "IBM Plex Serif", Georgia, "Times New Roman", serif;
-		font-size: 4em;
-		text-align: left;
-		color: black;
-		text-decoration-color: #f25;
-		margin-right: 0.25em;
-
-		&:after
-		{
-			content: "\00a0\00a0\00a0\00a0\00a0\00a0";
-		}
-	}
-
-	.sidebar-blurb .description
-	{
-		font-family: georgia;
-		font-size: 1em;
-		line-height: 1.5em;
-	}
-
-	.sidebar-blurb .navigation a
-	{
-		font-family: Helvetica, Arial, "sans-serif";
-		color: #aaa;
-
-		&:hover
-		{
-			color: #444;
-		}
-
-		&.nav_home
-		{
-			text-decoration-color: red;
-			&:hover
-			{
-				text-decoration-color: #f66;
-				text-shadow: 0 0 1em #f66;
-			}
-		}
-
-		&.nav_posts
-		{
-			text-decoration-color: green;
-			&:hover
-			{
-				text-decoration-color: #393;
-				text-shadow: 0 0 1em #393;
-			}
-		}
-
-		&.nav_about
-		{
-			text-decoration-color: #25f;
-			&:hover
-			{
-				text-decoration-color: #3af;
-				text-shadow: 0 0 1em #3af;
-			}
-		}
-	}
-
-
-	.sidebar-blurb a.nav_posts
-	{
-		text-decoration-color: #2a3;
-		text-align: left;
-		margin-right: 0.25em;
-	}
-
-	.sidebar-blurb .author:hover
-	{
-		text-decoration-color: #f79;
-		color: #d04;
-	}
-
-	//
-	// site-navigation
-	// ----------------
-	//
-	.site-navigation
-	{
-		font-family: Verdana;
-		background: $background;
-
-		a
-		{
-			padding: 0.33lh 0ch;
-			text-decoration: none;
-		}
-
-		a:hover
-		{
-			background: $link-background;
-			color: $color-highlight;
-		}
-
-		margin-bottom: 0.33lh;
-	}
-
-	a.paginated-post-title
-	{
-		font-size: 1.2em;
-		color: $title-color;
-	}
-
-	a.paginated-post-title:hover
-	{
-		color: $title-hover-color;
-	}
-
-	///
-	/// right-content
-	/// ----------------
-	/// 
-	.right-content
-	{
-		.left-spacer
-		{
-			background: $background;
-		}
-
-		.right-spacer
-		{
-			background: $void;
-		}
-	}
-
-
-	//
-	// post
-	// ------
-	//
-	//
-	.inner-contents
-	{
-		background-color: $background;
-	}
-
-	.post
-	{
-		font-family: Georgia;
-		color: #332;
-		background-color: $background;
-		padding-top: 2.5em;
-		padding-bottom: 2em;
-		margin-bottom: 2em;
-		line-height: 1.5em;
-		//width: 100%;
-
-		h2
-		{
-			font-family: "bingbong", Lato, "Microsoft Yahei", sans-serif;
-		}
-	}
-
-	.post-header, .post-content
-	{
-		background: $background;
-	}
-
-	.post-header
-	{
-		padding-top: 3vh;
-		font-family: Arial;
-	}
-
-	.post-title
-	{
-		font-size: 3em;
-		color: $title-color;
-		margin-bottom: 0;
-		font-family: Arial;
-	}
-
-	.post-author
-	{
-		margin-top: 0.5lh;
-		padding-left: 0.5ch;
-		color: #aa9;
-	}
-
-	.post-content
-	{
-		padding-top: 1lh;
-		padding-bottom: 2lh;
-		width: 100%;
-	}
-
-	.h5
-	{
-		font-family: Roboto Mono;
-	}
-
-
-
-	// paragraph code
-	code:not(.highlight code)
-	{
-		background-color: #e0e0d7;
-		border: 1px solid #c7c7c0;
-		margin-left: 0.0ch;
-		margin-right: 0.0ch;
-		padding-left: 0.25ch;
-		padding-right: 0.25ch;
-		font-size: 0.9em;
-	}
-
-
-
-	// CODE
-	.highlight
-	{
-		line-height: 1rem;
-		padding: 0.1ch 0.5em;
-		font-size: 1rem;
-	}
-
-	div.highlighter-rouge
-	{
-		box-shadow: 0 0 2px rgba(0, 0, 0, 1);
-	}
-
-	:not(.highlight) > .blammo
-	{
-		//background-color: #dfdfd0;
-		color: #000;
-		margin-left: 0.0ch;
-		margin-right: 0.0ch;
-		padding-left: 0.2ch;
-		padding-right: 0.2ch;
-		font-size: 1em;
-	}
-
-
-
-	// GENERAL THEMING
-
-	a
-	{
-		color: $color-link;
-	}
-
-	a:hover
-	{
-		color: $color-highlight;
-	}
+	// post-body
+	--post-h2-font-family: "bingbong", Lato, "Microsoft Yahei", sans-serif;
+	--post-h2-color: var(--accent-color);
+	--post-font-family: Georgia;
 }

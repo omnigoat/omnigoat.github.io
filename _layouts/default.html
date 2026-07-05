@@ -26,16 +26,15 @@
 						<div class="custom-select">
 							<select class="theme-selector">
 								{% for theme in site.data.themes %}
-									<div class="ct-{{theme}}">
-									<option><span class="theme-icon ct-{{theme}}"></span>{{theme}}</option>
-									</div>
+									<option><div class="ct-{{theme}}"><span class="theme-icon ct-{{theme}}"></span>{{theme}}</div></option>
 								{% endfor %}
 							</select>
 						</div>
 						<p class="description">
 							{{site.description}}
 						</p>
-						<p class="mediasize"></p>
+						<!-- debugging size of layout -->
+						<!-- <p class="mediasize"></p> -->
 						<p class="navigation">
 							<a class="nav_home" href="/" >home</a>
 							<a class="nav_posts" href="/posts" >posts</a>

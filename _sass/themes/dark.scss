@@ -22,13 +22,6 @@ $post-hyperlink-visited-color: color.scale($post-hyperlink-color, $lightness: -1
 
 $post-highlight: #6662;
 
-
-// first, our selection button
-button.select-theme.ct-dark
-{
-	background-color: $background;
-}
-
 span.theme-icon.ct-dark
 {
 	background-color: $background;
@@ -40,8 +33,10 @@ span.theme-icon.ct-dark
 :root.ct-dark
 {
 	--void-color: #1a1a1a;
+	--void-foreground-color: #aaa;
+
 	--background-color: #2d2d2d;
-	
+	--background-bright-color: #333;
 	--foreground-color: #c7c7c7;
 
 	--accent-color: #ff5057;
@@ -78,9 +73,12 @@ span.theme-icon.ct-dark
 	--post-hyperlink-visited-hover-color: #88a;
 
 	--post-h2-font-family: "bingbong", Lato, "Microsoft Yahei", sans-serif;
+	--post-h2-color: var(--accent-color);
+
+	// f79
 
 	// post
-	--post-body-font-family: Georgia;
+	--post-font-family: Georgia;
 	
 }
 
