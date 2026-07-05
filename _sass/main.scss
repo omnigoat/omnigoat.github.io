@@ -466,6 +466,7 @@ span.theme-icon
 		padding: 0.25em 0em 0.25em 0.5em;
 		border: 1px solid var(--void-accent-color);
 		color: var(--void-foreground-color);
+		font-family: sans-serif;
 
 		&::picker(select)
 		{
@@ -479,6 +480,8 @@ span.theme-icon
 
 		&:open
 		{
+			overflow: visible;
+
 			border-radius: 8px 8px 0 0;
 		}
 
@@ -496,11 +499,6 @@ span.theme-icon
 			{
 				background: var(--background-bright-color);
 			}
-
-			//&:hover:focus
-			//{
-			//	background: var(--background-color);
-			//}
 
 			// span
 			span.theme-icon

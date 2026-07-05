@@ -1,0 +1,48 @@
+
+
+
+
+// base palette
+:root.ct-pink
+{
+	--void-color: #ffaab7;
+	--void-accent-color: #b2b2b0;
+
+	--void-foreground-color: #777;
+	
+	--background-color: #ffe0e7;
+	--background-bright-color: #dadad7;
+
+	--foreground-color: #333;
+
+	--accent-color: #4466aa;
+	--accent-color-deep: #35a;
+	--accent-color-bright: #4f70aa;
+	--accent-color-deep-bright: #375faa;
+	--accent-color-dark: #66fa;
+}
+
+// topic palette
+:root.ct-light
+{
+	--text-color: var(--foreground-color);
+
+
+	--post-highlight-color: #6662;
+
+	// post-title
+	--post-title-font: Arial;
+	--post-title-font-size: 5em;
+	--post-title-color: var(--accent-color);
+	--post-title-hover-color: var(--accent-color-bright);
+	--post-title-hover-text-decoration-color: var(--accent-color-deep-bright);
+	--post-title-hover-text-shadow-color: var(--accent-color-dark);
+
+	// post-date
+	--post-date-color: #444;
+
+	// post-body
+	--post-h2-font-family: "bingbong", Lato, "Microsoft Yahei", sans-serif;
+	--post-h2-color: var(--accent-color);
+	--post-font-family: Georgia;
+}
