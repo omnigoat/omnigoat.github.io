@@ -4,7 +4,10 @@ gemspec
 # Main jekyll gem
 gem "jekyll", "~> 4.3.4"
 
-gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+platform :windows do
+  gem 'wdm', '>= 0.1.0'
+end
+
 gem 'csv'
 #gem 'bigdecimal', "~> 3.1.9"
 gem 'base64'
