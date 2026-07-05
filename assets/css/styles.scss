@@ -4,8 +4,8 @@
 @use "main" as *;
 
 {% for theme in site.data.themes %}
-	.ct-{{theme}}
-	{
+	//.ct-{{theme}}
+	//{
 		@include meta.load-css(themes/{{theme}});
-	}
+	//}
 {% endfor %}

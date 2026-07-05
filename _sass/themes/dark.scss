@@ -22,298 +22,124 @@ $post-hyperlink-visited-color: color.scale($post-hyperlink-color, $lightness: -1
 
 $post-highlight: #6662;
 
+
 // first, our selection button
 button.select-theme.ct-dark
 {
 	background-color: $background;
 }
 
-
-///
-/// body
-/// ------
-///
-body
-{
-	background-color: $void;
-}
-
-
-
-
-
-///
-/// left-content
-/// ----------------
-///
-
-// sidebar
-.sidebar-avatar
-{
-	background-image: radial-gradient(closest-side at 46% 50%, white, white, $void);
-}
-
-.sidebar-blurb
-{
-	margin: 0 0.5em;
-	color: #ddd;
-
-	> *
-	{
-		display: flex;
-		justify-content: space-between;
-		font-size: 1.5em;
-	}
-
-	.title
-	{
-		font-family: Arial, "ff-tisa-web-pro", "IBM Plex Serif", Georgia, "Times New Roman", serif;
-		font-size: 4em;
-		text-align: left;
-		color: #ff5057;
-		text-decoration-color: #f25;
-		margin-right: 0.25em;
-
-		&:after
-		{
-			content: "\00a0\00a0\00a0\00a0\00a0\00a0";
-		}
-
-		&:hover
-		{
-			color: #f66;
-			text-decoration-color: #f46;
-			text-shadow: 0 0 0.25em #d33;
-		}
-	}
-
-	.description
-	{
-		font-family: georgia;
-		font-size: 1.1em;
-		line-height: 1.25em;
-	}
-
-	.navigation a
-	{
-		font-family: Helvetica, Arial, "sans-serif";
-		color: #ddd;
-
-		&:hover
-		{
-			color: #aaa;
-		}
-
-		&.nav_home
-		{
-			text-decoration-color: #f00;
-			&:hover
-			{
-				color: #faa;
-				text-decoration-color: #d33;
-				text-shadow: 0 0 1em #f33;
-			}
-		}
-
-		&.nav_posts
-		{
-			text-decoration-color: #283;
-			&:hover
-			{
-				color: #afd;
-				text-decoration-color: #393;
-				text-shadow: 0 0 1em #393;
-			}
-		}
-
-		&.nav_about
-		{
-			text-decoration-color: #25f;
-			&:hover
-			{
-				color: #adf;
-				text-decoration-color: #3af;
-				text-shadow: 0 0 1em #3af;
-			}
-		}
-	}
-}
-
-
-///
-/// center-content
-/// ----------------
-///
-.contents
+span.theme-icon.ct-dark
 {
 	background-color: $background;
-}
-
-///
-/// POST
-/// --------
-///
-.post
-{
-	font-family: Georgia;
-	padding-top: 2.5em;
-	padding-bottom: 2em;
-	padding-left: 3rem;
-	line-height: 1.5em;
-	color: #c7c7c7;
-	background-color: $background;
-
-
-	.post-title
-	{
-		padding-top: 3vh;
-		font-size: 5em;
-		color: #ff5057;
-		line-height: 1em;
-		font-family: Arial;
-		margin-bottom: 0;
-		margin-top: 0;
-
-		&:hover
-		{
-			color: $post-title-hover-color;
-			text-decoration-color: $post-title-hover-text-decoration-color;
-			text-shadow: 0 0 1em $post-title-hover-text-shadow-color;
-		}
-	}
-
-	.post-author
-	{
-		padding-left: 0.5em;
-		color: $post-author-color;
-		margin-top: 0;
-		margin-bottom: 3em;
-	}
-
-
-	// GENERAL TEXT ELEMENTS
-	a
-	{
-		color: $post-hyperlink-color;
-
-		&:hover { color: $post-hyperlink-hover-color; }
-		&:visited { color: $post-hyperlink-visited-color; }
-		&:hover:visited { color: color.scale($post-hyperlink-color, $lightness: -10%); }
-	}
-
-	h2
-	{
-		font-family: "bingbong", Lato, "Microsoft Yahei", sans-serif;
-	}
-}
-
-.post
-{
-	.paginated-post-title
-	{
-		color: #448;
-		font-size: 1.35em;
-		font-family: Arial;
-	}
+	border-color: #777 !important;
 }
 
 
-
-
-.inner-contents .post:not(:last)
+// base palette
+:root.ct-dark
 {
-	//margin-bottom: 2em;
-	//position: relative;
-}
-
-
-///
-/// EXCERPTS
-///
-.post.excerpt
-{
-	.paginated-post-title
-	{
-		color: #ff5057;
-		line-height: 1em;
-	}
+	--void-color: #1a1a1a;
+	--background-color: #2d2d2d;
 	
-	.overlay
+	--foreground-color: #c7c7c7;
+
+	--accent-color: #ff5057;
+	--accent-color-deep: #ff2255;
+	--accent-color-bright: #ff575f;
+	--accent-color-deep-bright: #f46;
+	--accent-color-dark: #d33;
+}
+
+// topic palette
+:root.ct-dark
+{
+	--text-color: var(--foreground-color);
+
+
+	--post-highlight-color: #6662;
+
+	// post-title
+	--post-title-font: Arial;
+	--post-title-font-size: 5em;
+
+	// post-date
+	--post-date-color: #444;
+
+	// post-body
+	--post-title-color: var(--accent-color);
+	--post-title-hover-color: var(--accent-color-bright);
+	--post-title-hover-text-decoration-color: var(--accent-color-deep-bright);
+	--post-title-hover-text-shadow-color: var(--accent-color-dark);
+
+	--post-hyperlink-color: #29c;
+	--post-hyperlink-hover-color: #b7b7ee;
+	--post-hyperlink-visited-color: #737399;
+	--post-hyperlink-visited-hover-color: #88a;
+
+	--post-h2-font-family: "bingbong", Lato, "Microsoft Yahei", sans-serif;
+
+	// post
+	--post-body-font-family: Georgia;
+	
+}
+
+:root.ct-dark
+{
+	// bloom behind laughing man
+	.sidebar-avatar
 	{
-		background-image: linear-gradient(to bottom, transparent 50%, $background 90%);
+		background-image: radial-gradient(closest-side at 46% 50%, white, white, $void);
 	}
 }
 
-// effects (center-content only)
-.center-content .post.excerpt
+
+
+
+///
+/// syntax-highlighting
+/// ----------------------
+/// 
+:root.ct-dark
 {
-	&:hover
+	// paragraph code
+	code:not(.highlight code)
 	{
-		background-color: $post-highlight;
-
-		.paginated-post-title
-		{
-			color: #f66;
-			text-decoration-color: #f46;
-			text-shadow: 0 0 0.25em #d33;
-		}
-	}
-}
-
-
-.inner-contents .post.excerpt 
-
-
-// paragraph code
-code:not(.highlight code)
-{
-	background-color: #4a4a4a;
-	border: 1px solid #575757;
-	margin-left: 0.0ch;
-	margin-right: 0.0ch;
-	padding-left: 0.25ch;
-	padding-right: 0.25ch;
-	font-size: 0.9em;
-}
-
-
-
-// CODE
-.highlight
-{
-	line-height: 1rem;
-	padding: 0.1ch 0.5em;
-	font-size: 1rem;
-}
-
-div.highlighter-rouge
-{
-	box-shadow: 0 0 2px rgba(0, 0, 0, 1);
-}
-
-:not(.highlight) > .blammo
-{
-	//background-color: #dfdfd0;
-	color: #000;
-	margin-left: 0.0ch;
-	margin-right: 0.0ch;
-	padding-left: 0.2ch;
-	padding-right: 0.2ch;
-	font-size: 1em;
-}
-
-
-
-//
-.right-content
-{
-	.left-spacer
-	{
-		background: $background;
+		background-color: #4a4a4a;
+		border: 1px solid #575757;
+		margin-left: 0.0ch;
+		margin-right: 0.0ch;
+		padding-left: 0.25ch;
+		padding-right: 0.25ch;
+		font-size: 0.9em;
 	}
 
-	.right-spacer
+
+	///
+	/// syntax highlighting
+	/// -----------------------
+	/// 
+	.highlight
 	{
-		background: $void;
+		line-height: 1rem;
+		padding: 0.1ch 0.5em;
+		font-size: 1rem;
 	}
+
+	div.highlighter-rouge
+	{
+		box-shadow: 0 0 2px rgba(0, 0, 0, 1);
+	}
+
+	:not(.highlight) > .blammo
+	{
+		//background-color: #dfdfd0;
+		color: #000;
+		margin-left: 0.0ch;
+		margin-right: 0.0ch;
+		padding-left: 0.2ch;
+		padding-right: 0.2ch;
+		font-size: 1em;
+	}
+
 }

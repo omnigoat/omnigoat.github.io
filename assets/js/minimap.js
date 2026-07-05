@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () =>
 		//contents.style.height = (100 / w) * wy + "%";
 		//contents.style.width = 100 / w + "%";
 		contents.style.transform = `scale(${w}, ${w * wy})`;
-		
+		contents.style.visibility = `visible`;
 		
 		//const elements = document.querySelectorAll('.minimap .contents > *');
 		//elements.forEach(x => {
@@ -214,6 +214,20 @@ document.addEventListener("DOMContentLoaded", () =>
 		controller_has_capture = false;
 	}
 
+	function set_theme(theme_name)
+	{
+		var html = document.documentElement;
+		html.className = '';
+		html.classList.add(theme_name);
+		localStorage.setItem('theme', theme_name);
+		resize_minimap();
+	}
+
+
+
+	///
+	/// minimap
+	///
 	window.addEventListener("resize", resize_minimap);
 	window.addEventListener("scroll", align_contents);
 
@@ -227,38 +241,37 @@ document.addEventListener("DOMContentLoaded", () =>
 	document.body.addEventListener("mouseleave", mouseleave);
 	document.body.addEventListener("touchleave", mouseleave);
 
-	resize_minimap();
-});
-
-function set_theme(theme_name)
-{
-	var html = document.documentElement;
-	html.className = '';
-	html.classList.add(theme_name);
-	localStorage.setItem('theme', theme_name);
-}
-
-(function ()
-{
-	// word boundary required because 'ct' (current theme) clashes with seleCT-theme!
-	const re = /\bct-[\w-]+/;
-
-	// immediately set theme if encountered before
-	const theme = localStorage.getItem('theme');
-	if (theme)
+	///
+	/// themes
+	///
 	{
-		set_theme(theme);
-	}
-	else
-	{
-		const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-		set_theme(prefersLight ? 'ct-light' : 'ct-dark');
-	}
+		// immediately set theme if encountered before
+		const theme = localStorage.getItem('theme');
+		if (theme)
+		{
+			set_theme(theme);
+		}
+		// otherwise pick light or dark based off user preferences.
+		// when no preference is set pick dark.
+		else
+		{
+			const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+			set_theme(prefersLight ? 'ct-light' : 'ct-dark');
+		}
 
-	document.addEventListener('DOMContentLoaded', () => {
+		const re = /\bct-([\w-]+)/;
+	
+		// temporary buttons
 		document.querySelectorAll('.select-theme').forEach((x) => {
 			const theme = x.className.match(re);
 			x.onclick = function () { set_theme(theme[0]); };
 		});
-	});
-})();
+		
+		// hook up theme selector dropdown
+		const selector = document.querySelector('.theme-selector');
+		selector.value = theme.match(re)[1];
+		selector.onchange = function() { set_theme(`ct-${this.value}`); };
+	}
+
+	resize_minimap();
+});

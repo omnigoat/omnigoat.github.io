@@ -15,14 +15,23 @@
 							<a class="avatar" href="/"><img src="/assets/img/avatari.png" /></a>
 						</div>
 						<!-- wrap each button in div of its own theme-name, so per-theme styling can affect it -->
-						{% for theme in site.data.themes %}
+						<!-- {% for theme in site.data.themes %}
 							<div class="ct-{{theme}}" style="display: inline;"">
 								<button class="select-theme ct-{{theme}}"></button>
 							</div>
-						{% endfor %}
+						{% endfor %} -->
 					</div>
 					<div class="sidebar-blurb">
 						<a class="author title" href="/" >{{site.author.name}}</a>
+						<div class="custom-select">
+							<select class="theme-selector">
+								{% for theme in site.data.themes %}
+									<div class="ct-{{theme}}">
+									<option><span class="theme-icon ct-{{theme}}"></span>{{theme}}</option>
+									</div>
+								{% endfor %}
+							</select>
+						</div>
 						<p class="description">
 							{{site.description}}
 						</p>
@@ -67,6 +76,13 @@
 		var html = document.documentElement;
 		html.className = '';
 		html.classList.add(theme_name);
+	}
+
+	function change_theme_selection(theme_name)
+	{
+		var html = document.documentElement;
+		html.className = '';
+		html.classList.add(`ct-${theme_name}`);
 	}
 
 	</script>
